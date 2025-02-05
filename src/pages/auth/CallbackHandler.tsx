@@ -18,7 +18,7 @@ const CallbackHandler = () => {
             dispatch(login([...searchParams.entries()].reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})))
             setSuccess(true);
         }
-    }, [searchParams])
+    }, [searchParams, dispatch])
 
     return (
         <>

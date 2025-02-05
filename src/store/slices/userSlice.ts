@@ -11,9 +11,9 @@ export interface IUserState {
   hash?: string;
 }
 
-const initialState: IUserState = (localStorage.getItem(
-  localStorageNames.user
-) as IUserState) ?? {
+const initialState: IUserState = (JSON.parse(
+  localStorage.getItem(localStorageNames.user) ?? ""
+) as IUserState | "") || {
   first_name: "Anonim",
   last_name: "Foydalanuvchi",
 };
