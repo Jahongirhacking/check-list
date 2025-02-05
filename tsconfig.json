@@ -1,7 +1,14 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "./.netlify/functions",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "strict": false,
+    "noImplicitAny": false
+  },
+  "include": ["netlify/functions/**/*.ts"],
+  "exclude": ["node_modules", ".netlify/functions"]
 }
