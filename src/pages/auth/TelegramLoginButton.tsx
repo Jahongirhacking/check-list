@@ -3,7 +3,7 @@ import React from 'react'
 import { paths } from '../../routes/paths'
 import { telegramBotUsername } from '../../utils/config'
 
-const TelegramLoginPage = () => {
+const TelegramLoginButton = () => {
     return (
         <LoginButton
             botUsername={telegramBotUsername}
@@ -16,4 +16,4 @@ const TelegramLoginPage = () => {
     )
 }
 
-export default TelegramLoginPage
+export default TelegramLoginButton
