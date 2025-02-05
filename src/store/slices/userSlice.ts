@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface IState {
+export interface IUserState {
   id?: number;
   first_name?: string;
   last_name?: string;
@@ -10,13 +10,16 @@ export interface IState {
   hash?: string;
 }
 
-const initialState: IState = {};
+const initialState: IUserState = {
+  first_name: "Anonim",
+  last_name: "Foydalanuvchi",
+};
 
 const userSlice = createSlice({
   name: "user-slice",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<IState>) => {
+    login: (state, action: PayloadAction<IUserState>) => {
       state = { ...state, ...action.payload };
     },
   },

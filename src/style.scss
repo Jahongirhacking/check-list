@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.padding-box {
+  padding: 8px 18px;
+}
+
+.main-layout {
+  max-height: 100dvh;
+  min-height: 100dvh;
+
+  & > * {
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .navbar {
+    background-color: #91caff;
+  }
+
+  .main-content {
+    flex: 1;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    background-color: #e6f4ff;
+  }
+
+  .footer {
+    background-color: #bae0ff;
+
+    & > div {
+      padding: 8px 0;
+    }
+  }
+}
+
+.dark-theme {
+  background-color: rgb(46, 46, 46);
+
+  .navbar {
+    background-color: #002329;
+  }
+
+  .main-content {
+    background-color: #006d75;
+  }
+
+  .footer {
+    background-color: #00474f;
+  }
+}

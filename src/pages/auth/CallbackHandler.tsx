@@ -1,13 +1,30 @@
-import React from 'react';
-import { Navigate, useParams } from 'react-router';
+import { LoadingOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Navigate, useSearchParams } from 'react-router';
 import { paths } from '../../routes/paths';
-import { IState } from '../../store/slices/userSlice';
 
 const CallbackHandler = () => {
-    const params: IState = useParams();
-    console.log(params, params.id);
+    const [searchParams] = useSearchParams();
+    const [success, setSuccess] = useState(false);
 
-    return (<Navigate to={paths.base} />)
+    useEffect(() => {
+        if (searchParams.has('id')) {
+            console.log(searchParams);
+            setSuccess(true);
+        }
+    }, [searchParams])
+
+    return (
+        <>
+            {
+                success ? (
+                    <Navigate to={paths.base} />
+                ) : (
+                    <LoadingOutlined />
+                )
+            }
+        </>
+    )
 }
 
 export default CallbackHandler
