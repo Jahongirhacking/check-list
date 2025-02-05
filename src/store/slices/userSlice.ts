@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { localStorageNames } from "../../utils/config";
+import { getExistedOne, getLocalStorage } from "../../utils/storageUtils";
 
 export interface IUserState {
   id?: number;
@@ -11,12 +12,13 @@ export interface IUserState {
   hash?: string;
 }
 
-const initialState: IUserState = (JSON.parse(
-  localStorage.getItem(localStorageNames.user) ?? ""
-) as IUserState | "") || {
-  first_name: "Anonim",
-  last_name: "Foydalanuvchi",
-};
+const initialState: IUserState = getExistedOne(
+  getLocalStorage(localStorageNames.user),
+  {
+    first_name: "Anonim",
+    last_name: "Foydalanuvchi",
+  }
+) as IUserState;
 
 const userSlice = createSlice({
   name: "user-slice",
