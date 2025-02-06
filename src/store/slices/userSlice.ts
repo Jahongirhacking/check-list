@@ -31,6 +31,7 @@ const userSlice = createSlice({
     login: (state, action: PayloadAction<IUserState>) => {
       state = { ...state, ...action.payload };
       setLocalStorage(localStorageNames.user, state);
+      return state;
     },
     logout: () => {
       setLocalStorage(localStorageNames.user, initialState);
