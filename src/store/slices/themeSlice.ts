@@ -1,11 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { localStorageNames } from "../../utils/config";
+import {
+  getExistedOne,
+  getLocalStorage,
+  setLocalStorage,
+} from "../../utils/storageUtils";
 
 export interface IThemeState {
   color: "dark" | "light";
 }
 
 const initialState: IThemeState = {
-  color: "light",
+  color: getExistedOne(
+    getLocalStorage(localStorageNames.themeColor),
+    "light"
+  ) as IThemeState["color"],
 };
 
 const userSlice = createSlice({
@@ -14,6 +23,7 @@ const userSlice = createSlice({
   reducers: {
     toggleTheme: (state) => {
       state.color = state.color === "dark" ? "light" : "dark";
+      setLocalStorage(localStorageNames.themeColor, state.color);
     },
   },
 });

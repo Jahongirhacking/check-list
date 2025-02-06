@@ -1,5 +1,5 @@
-import { MoonOutlined, SunOutlined } from '@ant-design/icons'
-import { Avatar, Flex, FlexProps, Switch, Typography } from 'antd'
+import { LogoutOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons'
+import { Avatar, Button, Dropdown, Flex, FlexProps, Switch, Typography } from 'antd'
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../store/slices/themeSlice'
@@ -12,19 +12,26 @@ const Navbar: FC<Omit<FlexProps, 'children'>> = (props) => {
 
     return (
         <Flex {...props}>
-            <Flex gap={12} align='center'>
-                <Avatar src={user?.photo_url} size="large">{`${user?.first_name![0]}${user?.last_name![0]}`}</Avatar>
-                <Flex vertical>
-                    <Typography.Text strong>{user?.first_name}</Typography.Text>
-                    <Typography.Text strong>{user?.last_name}</Typography.Text>
+            <Flex className='frame' justify="space-between" gap={24} align='center'>
+                <Flex gap={12} align='center'>
+                    <Dropdown
+                        trigger={['click']}
+                        menu={{ items: [{ label: <Button danger icon={<LogoutOutlined />}>Chiqish</Button>, key: 'exit' }] }}
+                    >
+                        <Avatar src={user?.photo_url} size="large">{`${user?.first_name![0]}${user?.last_name![0]}`}</Avatar>
+                    </Dropdown>
+                    <Flex wrap style={{ columnGap: 5 }}>
+                        <Typography.Text strong>{user?.first_name}</Typography.Text>
+                        <Typography.Text strong>{user?.last_name}</Typography.Text>
+                    </Flex>
                 </Flex>
+                <Switch
+                    checkedChildren={<MoonOutlined />}
+                    unCheckedChildren={<SunOutlined />}
+                    value={themeColor === 'dark'}
+                    onChange={() => { dispatch(toggleTheme()) }}
+                />
             </Flex>
-            <Switch
-                checkedChildren={<MoonOutlined />}
-                unCheckedChildren={<SunOutlined />}
-                value={themeColor === 'dark'}
-                onChange={() => { dispatch(toggleTheme()) }}
-            />
         </Flex>
     )
 }

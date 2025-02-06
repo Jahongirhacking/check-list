@@ -14,7 +14,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
 
     return (
         <footer {...props}>
-            <Flex gap={8} vertical align='center'>
+            <Flex className='frame' gap={8} vertical align='center'>
                 {
                     user?.id ? (
                         <Button type='primary' icon={<UploadOutlined />} iconPosition='end' onClick={handleSend}>Telegramga yuborish</Button>
@@ -23,7 +23,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                     )
                 }
                 <Typography.Text style={{ textAlign: 'center' }}>
-                    <a href='https://jahongirhacking.netlify.app/'>Jahongir Hayitov</a>dan sizga taqdim etildi <HeartFilled style={{ color: '#ed0e28' }} />
+                    <a href='https://jahongirhacking.netlify.app/'>Jahongir Hayitov</a>dan sizga taqdim etildi <HeartFilled style={{ color: '#ff2e53' }} />
                 </Typography.Text>
             </Flex>
         </footer>

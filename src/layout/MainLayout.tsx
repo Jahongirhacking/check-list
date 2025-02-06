@@ -11,8 +11,8 @@ const MainLayout = () => {
 
     return (
         <Flex vertical className={`main-layout ${themeColor}-theme`} align='center'>
-            <Navbar className='navbar padding-box' justify="space-between" gap={24} align='center' />
-            <Flex vertical className='main-content padding-box'>
+            <Navbar className='navbar padding-box' justify='center' align='center' />
+            <Flex vertical className='main-content padding-box' align='center'>
                 <Outlet />
             </Flex>
             <Footer className='footer padding-box' />

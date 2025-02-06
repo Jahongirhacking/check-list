@@ -3,7 +3,7 @@ import React from 'react'
 
 const MainPage = () => {
     return (
-        <Flex vertical>
+        <Flex vertical className='frame'>
             <Typography.Text>Main</Typography.Text>
         </Flex>
     )

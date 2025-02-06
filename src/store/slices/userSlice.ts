@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { localStorageNames } from "../../utils/config";
-import { getExistedOne, getLocalStorage } from "../../utils/storageUtils";
+import {
+  getExistedOne,
+  getLocalStorage,
+  setLocalStorage,
+} from "../../utils/storageUtils";
 
 export interface IUserState {
   id?: number;
@@ -26,7 +30,11 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<IUserState>) => {
       state = { ...state, ...action.payload };
-      localStorage.setItem(localStorageNames.user, JSON.stringify(state));
+      setLocalStorage(localStorageNames.user, state);
+    },
+    logout: () => {
+      setLocalStorage(localStorageNames.user, initialState);
+      return initialState;
     },
   },
 });
