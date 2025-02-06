@@ -1,0 +1,20 @@
+.main-content {
+  .task-card {
+    .ant-card-body {
+      padding: 0;
+
+      .task-img {
+        width: 30%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        // height: 100%;
+      }
+
+      .task-content {
+        flex: 1;
+        padding: 8px;
+      }
+    }
+  }
+}

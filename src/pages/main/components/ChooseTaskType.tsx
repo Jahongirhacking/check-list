@@ -33,7 +33,7 @@ const ChooseTaskType = () => {
     }
 
     return (
-        <Flex vertical gap={12}>
+        <Flex vertical gap={12} className='choose-task-type'>
             <Typography.Text strong>Mashg'ulot turini tanlang:</Typography.Text>
             <Flex vertical gap={8}>
                 {

@@ -1,3 +1,4 @@
+import { PlusOutlined } from '@ant-design/icons';
 import { Button, Flex } from 'antd';
 import React, { useContext } from 'react';
 import { ControlledFlowContext } from '../../../components/flow/ControlledFlowContext';
@@ -11,7 +12,7 @@ const InitialAddTaskButton = () => {
 
     return (
         <Flex vertical gap={12}>
-            <Button type='primary' onClick={handleClickBtn}>Mashg'ulot qo'shish</Button>
+            <Button type='primary' icon={<PlusOutlined />} onClick={handleClickBtn}>Mashg'ulot yaratish</Button>
         </Flex>
     )
 }

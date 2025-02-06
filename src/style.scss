@@ -46,6 +46,14 @@
     scroll-behavior: smooth;
     padding-top: 20px;
     padding-bottom: 20px;
+
+    .choose-task-type {
+      .ant-btn-primary {
+        span {
+          color: #fff;
+        }
+      }
+    }
   }
 
   .footer {

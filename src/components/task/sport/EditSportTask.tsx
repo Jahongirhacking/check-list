@@ -1,11 +1,13 @@
 import { Flex, Form, Input, InputNumber, InputRef, Typography, message } from 'antd';
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { ISportTaskProps } from '../../../types';
+import { ControlledFlowContext } from '../../flow/ControlledFlowContext';
 import FlowButtons from '../../flow/FlowButtons';
 
 const EditSportTask = ({ props }: { props?: ISportTaskProps }) => {
     const [form] = Form.useForm();
     const inputRef = useRef<(InputRef | HTMLInputElement | null)[]>([]);
+    const context = useContext(ControlledFlowContext);
 
     useEffect(() => {
         if (inputRef.current[0]) {
@@ -17,19 +19,21 @@ const EditSportTask = ({ props }: { props?: ISportTaskProps }) => {
         const fields = ['name', 'reps', 'totalSets'];
         if (index < fields.length - 1) {
             inputRef.current[index + 1]?.focus();
-        } else {
-            form.submit(); // Submit on last input
         }
     };
 
-    const onFinish = (values: object) => {
-        console.log('Form submitted:', values);
-        message.success('Sport mashgʻulot muvaffaqiyatli qoʻshildi!');
+    const onFinish = (values: ISportTaskProps) => {
+        context?.onSubmit(context?.pushData({
+            name: values?.name,
+            totalSets: values?.totalSets,
+            reps: values?.reps
+        } as ISportTaskProps));
+        message.success('Sport mashgʻuloti muvaffaqiyatli qoʻshildi!');
     };
 
     return (
         <Flex vertical gap={12} className='sport-task edit-task'>
-            <Typography.Text strong>Sport mashg'ulot qo'shish 💪</Typography.Text>
+            <Typography.Text strong>Sport mashg'uloti qo'shish 💪</Typography.Text>
             <Form
                 form={form}
                 onFinish={onFinish}

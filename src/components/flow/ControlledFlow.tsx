@@ -17,7 +17,12 @@ const ControlledFlow = ({
   setData?: Dispatch<SetStateAction<object>>
 }) => {
   const pushData = (newData: object) => {
-    setData(prevData => ({ ...prevData, ...newData }));
+    let tempData = {};
+    setData(prevData => {
+      tempData = { ...prevData, ...newData };
+      return tempData;
+    });
+    return tempData;
   };
 
   const setNextIndex = () => {

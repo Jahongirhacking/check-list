@@ -7,7 +7,7 @@ interface IProps {
     onSubmit: (data?: object) => void;
     data: object;
     setData: Dispatch<SetStateAction<object>>;
-    pushData: (data: object) => void;
+    pushData: (data: object) => object;
 }
 
 export const ControlledFlowContext = createContext<IProps | null>(null);
