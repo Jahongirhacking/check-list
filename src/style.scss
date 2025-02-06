@@ -44,6 +44,8 @@
     scrollbar-width: thin;
     scrollbar-color: #91caffc9 transparent;
     scroll-behavior: smooth;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .footer {
@@ -61,6 +63,10 @@
     & > div {
       padding: 8px 0;
     }
+  }
+
+  .ant-input-number {
+    width: 100%;
   }
 }
 
