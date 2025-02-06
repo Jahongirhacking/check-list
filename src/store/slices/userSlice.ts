@@ -18,7 +18,7 @@ export interface IUserState {
 
 const initialState: IUserState = {
   first_name: "Anonim",
-  last_name: "Foydalanuvchi",
+  last_name: "Hisob",
 };
 
 const userSlice = createSlice({
