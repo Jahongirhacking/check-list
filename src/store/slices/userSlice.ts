@@ -16,17 +16,17 @@ export interface IUserState {
   hash?: string;
 }
 
-const initialState: IUserState = getExistedOne(
-  getLocalStorage(localStorageNames.user),
-  {
-    first_name: "Anonim",
-    last_name: "Foydalanuvchi",
-  }
-) as IUserState;
+const initialState: IUserState = {
+  first_name: "Anonim",
+  last_name: "Foydalanuvchi",
+};
 
 const userSlice = createSlice({
   name: "user-slice",
-  initialState,
+  initialState: getExistedOne(
+    getLocalStorage(localStorageNames.user),
+    initialState
+  ) as IUserState,
   reducers: {
     login: (state, action: PayloadAction<IUserState>) => {
       state = { ...state, ...action.payload };
