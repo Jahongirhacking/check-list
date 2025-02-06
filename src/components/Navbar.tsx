@@ -3,6 +3,7 @@ import { Avatar, Button, Dropdown, Flex, FlexProps, Switch, Typography } from 'a
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../store/slices/themeSlice'
+import { logout } from '../store/slices/userSlice'
 import { RootState } from '../store/store'
 
 const Navbar: FC<Omit<FlexProps, 'children'>> = (props) => {
@@ -10,13 +11,17 @@ const Navbar: FC<Omit<FlexProps, 'children'>> = (props) => {
     const themeColor = useSelector((store: RootState) => store.theme?.color);
     const dispatch = useDispatch();
 
+    const handleLogout = () => {
+        dispatch(logout());
+    }
+
     return (
         <Flex {...props}>
             <Flex className='frame' justify="space-between" gap={24} align='center'>
                 <Flex gap={12} align='center'>
                     <Dropdown
                         trigger={['click']}
-                        menu={{ items: [{ label: <Button danger icon={<LogoutOutlined />}>Chiqish</Button>, key: 'exit' }] }}
+                        menu={{ items: [{ label: <Button danger icon={<LogoutOutlined />} onClick={handleLogout}>Chiqish</Button>, key: 'exit' }] }}
                     >
                         <Avatar src={user?.photo_url} size="large">{`${user?.first_name![0]}${user?.last_name![0]}`}</Avatar>
                     </Dropdown>
