@@ -1,12 +1,15 @@
 import { Handler } from "@netlify/functions";
+import axios from "axios";
+const BOT_TOKEN = "7694451864:AAERgoIGkyEeBUvoXgNoKfTiQHVZrQ2mfwc";
 
-const handler: Handler = async (event) => {
+const handler: Handler = async () => {
   try {
-    const data = event.body;
-    console.log(data);
+    const data = await axios.get(
+      `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates`
+    );
     return {
       statusCode: 200,
-      body: data,
+      body: JSON.stringify(data),
     };
   } catch (err) {
     return {

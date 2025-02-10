@@ -42,9 +42,9 @@ const MainPage = () => {
                     tasks?.map(task => (
                         <Card key={task?.id} className='task-card'
                             actions={[
-                                <Button danger type="primary" icon={<MinusOutlined />} />,
-                                <Button color="cyan" variant='solid' icon={<CheckOutlined />} />,
-                                <Button type="primary" icon={<PlusOutlined />} />
+                                <Button size='small' danger type="primary" icon={<MinusOutlined />} />,
+                                <Button size='small' color="cyan" variant='solid' icon={<CheckOutlined />} />,
+                                <Button size='small' type="primary" icon={<PlusOutlined />} />
                             ]
                             }>
                             <EditableTask
