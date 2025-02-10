@@ -1,6 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Flex } from 'antd';
+import { Button, Flex, Image } from 'antd';
 import React, { useContext } from 'react';
+import UploadImage from '../../../assets/upload.svg';
 import { ControlledFlowContext } from '../../../components/flow/ControlledFlowContext';
 
 const InitialAddTaskButton = () => {
@@ -11,7 +12,8 @@ const InitialAddTaskButton = () => {
     }
 
     return (
-        <Flex vertical gap={12}>
+        <Flex vertical gap={12} align='center'>
+            <Image width={80} preview={false} src={UploadImage} onClick={handleClickBtn} style={{ cursor: 'pointer' }} />
             <Button type='primary' icon={<PlusOutlined />} onClick={handleClickBtn}>Mashg'ulot yaratish</Button>
         </Flex>
     )
