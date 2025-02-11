@@ -12,7 +12,6 @@ const CallbackHandler = () => {
 
     useEffect(() => {
         if (searchParams.has('id')) {
-            console.log(searchParams, searchParams.get('id'));
             // window.open(`https://t.me/${telegramBotUsername}?start=welcome`, "_blank");
             dispatch(login([...searchParams.entries()].reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})))
             setSuccess(true);

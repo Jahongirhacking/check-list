@@ -13,15 +13,12 @@ function App() {
   const getChatId = async (userId: number) => {
     try {
       const { data } = await axios.get(getUpdatesUrl);
-      console.log(data, userId);
       const current = data.result.find(
         (chat) => chat?.message?.from?.id == userId
       );
-      console.log('current', current);
       if (!current) {
         throw new Error("chat id not found");
       }
-      console.log(current);
       const chat_id = current.message.chat.id;
       setLocalStorage(localStorageNames.chat_id, chat_id);
     } catch (err) {
@@ -34,9 +31,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log('userId', userId);
     if (userId) {
-      console.log('success');
       getChatId(userId);
     }
   }, [userId])
