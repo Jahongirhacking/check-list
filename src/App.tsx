@@ -12,9 +12,10 @@ function App() {
   const userId = useSelector((store: RootState) => store.user.id);
   const getChatId = async (userId: number) => {
     try {
-      const response = await axios.get(getUpdatesUrl);
-      const current = response.data.result.find(
-        (chat) => chat.message.from.id === userId
+      const { data } = await axios.get(getUpdatesUrl);
+      console.log(data);
+      const current = data.result.find(
+        (chat) => chat?.message?.from?.id === userId
       );
       if (!current) {
         throw new Error("chat id not found");
