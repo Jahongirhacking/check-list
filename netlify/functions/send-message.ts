@@ -11,7 +11,7 @@ const handler: Handler = async (event) => {
       {
         chat_id, // `id` is userId which is the same as chatId in private chats
         text,
-        parse_mode: "MarkdownV2",
+        // parse_mode: "MarkdownV2",
       }
     );
     return {
