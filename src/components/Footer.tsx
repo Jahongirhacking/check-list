@@ -7,7 +7,7 @@ import TelegramLoginButton from '../pages/auth/TelegramLoginButton'
 import { RootState } from '../store/store'
 import { localStorageNames, sendMessageUrl } from '../utils/config'
 import { getLocalStorage } from '../utils/storageUtils'
-import { escapeMarkdown, generateGeneralTasksMessage } from '../utils/taskUtils'
+import { generateGeneralTasksMessage } from '../utils/taskUtils'
 
 const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
     const user = useSelector((store: RootState) => store.user);
@@ -17,7 +17,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
         try {
             await axios.post(sendMessageUrl, {
                 chat_id: getLocalStorage(localStorageNames.chat_id) ?? user?.id,
-                text: escapeMarkdown(generateGeneralTasksMessage(tasks))
+                text: generateGeneralTasksMessage(tasks)
             });
             message.success("Xabar muvaffaqiyatli yuborildi!")
         } catch (err) {

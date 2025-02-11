@@ -10,7 +10,8 @@ export const generateGeneralTasksMessage = (
 ): string => {
   moment.locale("uz");
   let message = "";
-  message += `${moment().format("📅 DD.MM.YYYY - dddd - HH:mm\n\n")}`;
+  message += `${moment().format("📅 DD.MM.YYYY - dddd - HH:mm")}`;
+  message += "\n\n";
   const sports: ISportTaskProps[] = [];
   const sciences: IDefaultTaskProps[] = [];
   const dailies: IDefaultTaskProps[] = [];
