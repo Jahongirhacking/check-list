@@ -5,7 +5,7 @@ const BOT_TOKEN = "7694451864:AAERgoIGkyEeBUvoXgNoKfTiQHVZrQ2mfwc";
 const handler: Handler = async (event) => {
   try {
     const chat_id = JSON.parse(event.body).chat_id;
-    const text = JSON.parse(event.body).chat_id;
+    const text = JSON.parse(event.body).text;
     const { data } = await axios.post(
       `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
       {
