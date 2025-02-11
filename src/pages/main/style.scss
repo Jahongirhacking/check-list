@@ -1,19 +1,34 @@
 .main-content {
   .task-card {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border: 1px solid #141414;
+
+    &:has(.edit-task) {
+      .edit-task {
+        padding: 8px;
+      }
+
+      .ant-card-actions {
+        display: none;
+      }
+    }
+
     .ant-card-body {
       padding: 0;
 
-      .task-img {
-        width: 30%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        // height: 100%;
-      }
-
-      .task-content {
+      .task-body {
         flex: 1;
         padding: 8px;
+      }
+    }
+
+    .ant-card-actions {
+      background: transparent;
+
+      li {
+        margin: 8px 0 !important;
       }
     }
   }

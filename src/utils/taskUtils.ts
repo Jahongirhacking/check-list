@@ -75,7 +75,7 @@ export const generateSportTaskMessage = (task: ISportTaskProps) => {
       ? 0
       : ((task.current ?? 0) / (task.totalSets ?? 1)) * 100;
   string += `${percent === 0 ? "🚫" : percent === 100 ? "✅" : "⚠️"} `;
-  string += `${task.reps} ${task.name} - <b>${task.current} / ${task.totalSets}</b>\n`;
+  string += `${task.reps} ${task.name} - <b>${task.current} / ${task.totalSets} sets</b>\n`;
   return string;
 };
 
@@ -91,7 +91,9 @@ export const generateDefaultTask = (task: IDefaultTaskProps) => {
   string += `${!task.isCountable ? (task.isDone ? "✅" : "🚫") : ""} ${
     task.name
   }${
-    task.isCountable ? ` - <b>${task.current} / ${task.totalPart}</b>` : ""
+    task.isCountable
+      ? ` - <b>${task.current} / ${task.totalPart} ${task.partUnit}</b>`
+      : ""
   }\n`;
   return string;
 };

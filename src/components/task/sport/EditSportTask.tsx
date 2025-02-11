@@ -1,13 +1,17 @@
-import { Flex, Form, Input, InputNumber, InputRef, Typography, message } from 'antd';
+import { Button, Flex, Form, Input, InputNumber, InputRef, Typography, message } from 'antd';
 import React, { useContext, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { editTask } from '../../../store/slices/taskSlice';
 import { ISportTaskProps } from '../../../types';
 import { ControlledFlowContext } from '../../flow/ControlledFlowContext';
 import FlowButtons from '../../flow/FlowButtons';
+import { ITaskReducer } from '../TaskReducer';
 
-const EditSportTask = ({ props }: { props?: ISportTaskProps }) => {
+const EditSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, setReducerName?: ITaskReducer['setReducerName'] }) => {
     const [form] = Form.useForm();
     const inputRef = useRef<(InputRef | HTMLInputElement | null)[]>([]);
     const context = useContext(ControlledFlowContext);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (inputRef.current[0]) {
@@ -31,9 +35,22 @@ const EditSportTask = ({ props }: { props?: ISportTaskProps }) => {
         message.success('Sport mashgʻuloti muvaffaqiyatli qoʻshildi!');
     };
 
+    const handleEdit = () => {
+        dispatch(editTask({ id: props?.id, ...form.getFieldsValue() }));
+        if (setReducerName) {
+            setReducerName('view');
+        }
+    }
+
+    const handleCancel = () => {
+        if (setReducerName) {
+            setReducerName('view');
+        }
+    }
+
     return (
         <Flex vertical gap={12} className='sport-task edit-task'>
-            <Typography.Text strong>Sport mashg'uloti qo'shish 💪</Typography.Text>
+            <Typography.Text strong>Sport mashg'uloti {context ? "qo'shish" : "o'zgartirish"}</Typography.Text>
             <Form
                 form={form}
                 onFinish={onFinish}
@@ -81,7 +98,20 @@ const EditSportTask = ({ props }: { props?: ISportTaskProps }) => {
                         />
                     </Form.Item>
                 </Flex>
-                <FlowButtons />
+                {
+                    context ? (
+                        <FlowButtons />
+                    ) : (
+                        <Flex className="flow-btns" gap={12} wrap align='center' justify='right'>
+                            <Button onClick={handleCancel}>
+                                Bekor qilish
+                            </Button>
+                            <Button type="primary" onClick={handleEdit}>
+                                O'zgartirish
+                            </Button>
+                        </Flex>
+                    )
+                }
             </Form>
         </Flex>
     );
