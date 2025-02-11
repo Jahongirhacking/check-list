@@ -32,7 +32,9 @@ function App() {
   }, [])
 
   useEffect(() => {
+    console.log('userId', userId);
     if (userId) {
+      console.log('success');
       getChatId(userId);
     }
   }, [userId])

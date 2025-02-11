@@ -13,7 +13,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
 
     const handleSend = async () => {
         try {
-            await axios.post(sendMessageUrl, { chat_id: getLocalStorage(localStorageNames.chat_id) });
+            await axios.post(sendMessageUrl, { chat_id: getLocalStorage(localStorageNames.chat_id) ?? user?.id });
         } catch (err) {
             console.error(err);
         }
