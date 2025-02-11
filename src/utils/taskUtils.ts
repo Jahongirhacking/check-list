@@ -37,30 +37,30 @@ export const generateGeneralTasksMessage = (
     }
   });
   if (!sports.length && !sciences.length && !dailies.length && !others.length) {
-    message += `Sizda hech qanday mashg‘ulot yo‘q 🤷‍♂️\n\n[Mashg‘ulot qo‘shish](https://check-todo-list.netlify.app/)`;
+    message += `<a href="https://check-todo-list.netlify.app/">Mashg‘ulot qo‘shish</a>`;
     return message;
   }
   if (sports.length) {
-    message += `*Sport mashg‘ulotlari:*\n`;
+    message += `<b>Sport mashg‘ulotlari:</b>\n`;
     sports.forEach((task) => (message += generateSportTaskMessage(task)));
     message += "\n";
   }
   if (sciences.length) {
-    message += `*Ilmiy mashg‘ulotlar:*\n`;
+    message += `<b>Ilmiy mashg‘ulotlar:</b>\n`;
     sciences.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
   if (dailies.length) {
-    message += `*Kunlik mashg‘ulotlar:*\n`;
+    message += `<b>Kunlik mashg‘ulotlar:</b>\n`;
     dailies.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
   if (others.length) {
-    message += `*Boshqa mashg‘ulotlar:*\n`;
+    message += `<b>Boshqa mashg‘ulotlar:</b>\n`;
     others.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
-  message += `[Checklist](https://check-todo-list.netlify.app/)`;
+  message += `<a href="https://check-todo-list.netlify.app/">Checklist</a>`;
   return message;
 };
 
@@ -75,7 +75,7 @@ export const generateSportTaskMessage = (task: ISportTaskProps) => {
       ? 0
       : ((task.current ?? 0) / (task.totalSets ?? 1)) * 100;
   string += `${percent === 0 ? "🚫" : percent === 100 ? "✅" : "⚠️"} `;
-  string += `${task.reps} ${task.name} - *${task.current} / ${task.totalSets}*\n`;
+  string += `${task.reps} ${task.name} - <b>${task.current} / ${task.totalSets}</b>\n`;
   return string;
 };
 
@@ -90,6 +90,8 @@ export const generateDefaultTask = (task: IDefaultTaskProps) => {
   }
   string += `${!task.isCountable ? (task.isDone ? "✅" : "🚫") : ""} ${
     task.name
-  }${task.isCountable ? ` - *${task.current} / ${task.totalPart}*` : ""}\n`;
+  }${
+    task.isCountable ? ` - <b>${task.current} / ${task.totalPart}</b>` : ""
+  }\n`;
   return string;
 };
