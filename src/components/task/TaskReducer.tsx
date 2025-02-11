@@ -1,12 +1,12 @@
 import React, { Dispatch, ReactElement, SetStateAction } from 'react';
-import { IGenerealTaskProps } from '../../types';
+import { IGeneralTaskProps } from '../../types';
 
 export interface ITaskReducer {
     viewComponent: ReactElement;
     editComponent: ReactElement;
     reducerName: 'edit' | 'view';
     setReducerName?: Dispatch<SetStateAction<ITaskReducer["reducerName"]>>,
-    props: IGenerealTaskProps;
+    props: IGeneralTaskProps;
 }
 
 const TaskReducer = ({ viewComponent, editComponent, reducerName, setReducerName, props }: ITaskReducer) => {

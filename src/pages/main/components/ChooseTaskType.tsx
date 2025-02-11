@@ -2,12 +2,12 @@ import { Button, Flex, Typography } from 'antd';
 import React, { ReactElement, useContext, useState } from 'react';
 import { ControlledFlowContext } from '../../../components/flow/ControlledFlowContext';
 import FlowButtons from '../../../components/flow/FlowButtons';
-import { IGenerealTaskProps } from '../../../types';
+import { IGeneralTaskProps } from '../../../types';
 
 const ChooseTaskType = () => {
     const context = useContext(ControlledFlowContext);
-    const [selectedType, setSelectedType] = useState<IGenerealTaskProps['type'] | null>(null);
-    const types: { label: ReactElement, value: IGenerealTaskProps["type"] }[] = [
+    const [selectedType, setSelectedType] = useState<IGeneralTaskProps['type'] | null>(null);
+    const types: { label: ReactElement, value: IGeneralTaskProps["type"] }[] = [
         {
             label: <Typography.Text strong>Sport 💪</Typography.Text>,
             value: 'sport',
@@ -28,7 +28,7 @@ const ChooseTaskType = () => {
 
     const handleClickNextButton = () => {
         if (selectedType) {
-            context?.pushData({ type: selectedType } as IGenerealTaskProps)
+            context?.pushData({ type: selectedType } as IGeneralTaskProps)
         }
     }
 

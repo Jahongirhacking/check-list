@@ -8,7 +8,7 @@ import ControlledFlow from '../../components/flow/ControlledFlow'
 import TaskContainer from '../../components/task/TaskContainer'
 import { addTask } from '../../store/slices/taskSlice'
 import { RootState } from '../../store/store'
-import { IGenerealTaskProps } from '../../types'
+import { IGeneralTaskProps } from '../../types'
 import ChooseTaskType from './components/ChooseTaskType'
 import EditableTask from './components/EditableTask'
 import InitialAddTaskButton from './components/InitialAddTaskButton'
@@ -21,15 +21,15 @@ const MainPage = () => {
     const tasks = useSelector((store: RootState) => store.task)?.tasks;
     const IMAGES_LENGTH = 5;
 
-    const handleAddTask = (taskData: IGenerealTaskProps | object | undefined) => {
+    const handleAddTask = (taskData: IGeneralTaskProps | object | undefined) => {
         dispatch(addTask({
             ...taskData,
             id: uuidv4(),
             isDone: false,
-            isCountable: (taskData as IGenerealTaskProps)?.type === 'sport' ? true : (taskData as IGenerealTaskProps)?.isCountable,
+            isCountable: (taskData as IGeneralTaskProps)?.type === 'sport' ? true : (taskData as IGeneralTaskProps)?.isCountable,
             createdAt: moment().unix(),
             order: tasks?.length ?? 0,
-            img: `/images/${(taskData as IGenerealTaskProps)?.type}/${Math.floor(Math.random() * IMAGES_LENGTH) + 1}.jpg`,
+            img: `/images/${(taskData as IGeneralTaskProps)?.type}/${Math.floor(Math.random() * IMAGES_LENGTH) + 1}.jpg`,
             current: 0,
         }))
         setStep(0);
@@ -66,9 +66,9 @@ const MainPage = () => {
                     <InitialAddTaskButton />
                     <ChooseTaskType />
                     <TaskContainer
-                        type={(data as IGenerealTaskProps)?.type}
+                        type={(data as IGeneralTaskProps)?.type}
                         reducerName='edit'
-                        props={{ type: (data as IGenerealTaskProps)?.type }}
+                        props={{ type: (data as IGeneralTaskProps)?.type }}
                     />
                 </ControlledFlow>
             </Card>

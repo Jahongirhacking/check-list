@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { IGenerealTaskProps } from '../../types';
+import { IGeneralTaskProps } from '../../types';
 import TaskReducer, { ITaskReducer } from './TaskReducer';
 import EditDefaultTask from './default/EditDefaultTask';
 import ViewDefaultTask from './default/ViewDefaultTask';
@@ -7,10 +7,10 @@ import EditSportTask from './sport/EditSportTask';
 import ViewSportTask from './sport/ViewSportTask';
 
 export interface ITaskContainer {
-    type: IGenerealTaskProps['type'];
+    type: IGeneralTaskProps['type'];
     reducerName: ITaskReducer["reducerName"];
     setReducerName?: Dispatch<SetStateAction<ITaskReducer["reducerName"]>>
-    props: IGenerealTaskProps;
+    props: IGeneralTaskProps;
 }
 
 const TaskContainer = ({ type, reducerName, setReducerName, props }: ITaskContainer) => {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IGenerealTaskProps } from "../../types";
+import { IGeneralTaskProps } from "../../types";
 import { localStorageNames } from "../../utils/config";
 import {
   getExistedOne,
@@ -8,21 +8,21 @@ import {
 } from "../../utils/storageUtils";
 
 export interface ITaskState {
-  tasks: IGenerealTaskProps[];
+  tasks: IGeneralTaskProps[];
 }
 
 const initialState: ITaskState = {
   tasks: getExistedOne(
     getLocalStorage(localStorageNames.tasks),
     []
-  ) as IGenerealTaskProps[],
+  ) as IGeneralTaskProps[],
 };
 
 const userSlice = createSlice({
   name: "tasks-slice",
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<IGenerealTaskProps>) => {
+    addTask: (state, action: PayloadAction<IGeneralTaskProps>) => {
       state.tasks = [...state.tasks, action.payload];
       setLocalStorage(localStorageNames.tasks, state.tasks);
     },

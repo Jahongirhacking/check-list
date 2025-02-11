@@ -1,4 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
+import { message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate, useSearchParams } from 'react-router';
@@ -15,6 +16,7 @@ const CallbackHandler = () => {
             // window.open(`https://t.me/${telegramBotUsername}?start=welcome`, "_blank");
             dispatch(login([...searchParams.entries()].reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {})))
             setSuccess(true);
+            message.success("Tizimga muvaffaqiyatli kirdingiz!")
         }
     }, [searchParams, dispatch])
 
