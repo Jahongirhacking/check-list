@@ -4,7 +4,7 @@ const BOT_TOKEN = "7694451864:AAERgoIGkyEeBUvoXgNoKfTiQHVZrQ2mfwc";
 
 const handler: Handler = async () => {
   try {
-    const data = await axios.get(
+    const { data } = await axios.get(
       `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates`
     );
     return {
