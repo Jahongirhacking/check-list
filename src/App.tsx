@@ -15,7 +15,7 @@ function App() {
       const { data } = await axios.get(getUpdatesUrl);
       console.log(data, userId);
       const current = data.result.find(
-        (chat) => chat?.message?.from?.id === userId
+        (chat) => chat?.message?.from?.id == userId
       );
       console.log('current', current);
       if (!current) {
