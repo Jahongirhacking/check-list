@@ -111,16 +111,7 @@ const userSlice = createSlice({
       if (taskIndex === -1) return;
       state.tasks[taskIndex] = {
         ...state.tasks[taskIndex],
-        name: action.payload.name,
-        ...(state.tasks[taskIndex].type === "sport"
-          ? ({
-              totalSets: (action.payload as ISportTaskProps).totalSets,
-              reps: (action.payload as ISportTaskProps).reps,
-            } as ISportTaskProps)
-          : ({
-              totalPart: (action.payload as IDefaultTaskProps).totalPart,
-              partUnit: (action.payload as IDefaultTaskProps).partUnit,
-            } as IDefaultTaskProps)),
+        ...action.payload,
       };
       setLocalStorage(localStorageNames.tasks, state.tasks);
       return state;

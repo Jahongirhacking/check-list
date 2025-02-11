@@ -1,8 +1,8 @@
-import { DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons'
+import { ClearOutlined, DeleteOutlined, EditOutlined, MoreOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Flex, MenuProps, Typography } from 'antd'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteTask } from '../../../store/slices/taskSlice'
+import { deleteTask, resetTask } from '../../../store/slices/taskSlice'
 import { ISportTaskProps } from '../../../types'
 import { ITaskReducer } from '../TaskReducer'
 
@@ -20,19 +20,32 @@ const ViewSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, set
         }
     }
 
+    const handleReset = () => {
+        if (window.confirm(`Siz ${props?.name} mashg'ulotini tozalamoqchimisiz ya'ni undagi ko'rsatkich boshlang'ich holatiga qaytadi, shunga rozimisiz?`)) {
+            dispatch(resetTask(props?.id));
+        }
+    }
+
     const menuItems: MenuProps['items'] = [
+        {
+            key: 'edit',
+            label: "O'zgartirish",
+            icon: <EditOutlined />,
+            onClick: handleEdit,
+        },
+        {
+            key: 'reset',
+            label: "Tozalash",
+            icon: <ClearOutlined />,
+            onClick: handleReset,
+            style: { color: '#13c2c2' },
+        },
         {
             key: 'delete',
             label: "O'chirish",
             icon: <DeleteOutlined />,
             onClick: handleDelete,
             style: { color: 'red' },
-        },
-        {
-            key: 'edit',
-            label: "O'zgartirish",
-            icon: <EditOutlined />,
-            onClick: handleEdit,
         }
     ]
 

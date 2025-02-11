@@ -35,7 +35,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
     }
 
     const handleResetAll = () => {
-        if (window.confirm("Siz barcha mashg'ulotlarni qayta o'rnatmoqchimisiz ya'ni barcha mashg'ulot ko'rsatkichlari boshlang'ich holatiga o'tadi, shunga rozimisiz?")) {
+        if (window.confirm("Siz barcha mashg'ulotlarni tozalamoqchimisiz ya'ni barcha mashg'ulot ko'rsatkichlari boshlang'ich holatiga o'tadi, shunga rozimisiz?")) {
             dispatch(resetAllTask());
         }
     }
