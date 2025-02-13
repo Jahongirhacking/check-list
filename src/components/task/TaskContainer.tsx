@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, ReactElement, SetStateAction } from 'react';
 import { IGeneralTaskProps } from '../../types';
 import TaskReducer, { ITaskReducer } from './TaskReducer';
 import EditDefaultTask from './default/EditDefaultTask';
@@ -11,15 +11,16 @@ export interface ITaskContainer {
     reducerName: ITaskReducer["reducerName"];
     setReducerName?: Dispatch<SetStateAction<ITaskReducer["reducerName"]>>
     props: IGeneralTaskProps;
+    children?: ReactElement
 }
 
-const TaskContainer = ({ type, reducerName, setReducerName, props }: ITaskContainer) => {
+const TaskContainer = ({ type, reducerName, setReducerName, props, children }: ITaskContainer) => {
     switch (type) {
         case 'sport': {
             return (
                 <TaskReducer
                     editComponent={<EditSportTask />}
-                    viewComponent={<ViewSportTask />}
+                    viewComponent={<ViewSportTask {...{ children }} />}
                     {...{ reducerName, props, setReducerName }}
                 />
             )
@@ -28,7 +29,7 @@ const TaskContainer = ({ type, reducerName, setReducerName, props }: ITaskContai
             return (
                 <TaskReducer
                     editComponent={<EditDefaultTask />}
-                    viewComponent={<ViewDefaultTask />}
+                    viewComponent={<ViewDefaultTask {...{ children }} />}
                     {...{ reducerName, props, setReducerName }}
                 />
             )

@@ -13,7 +13,7 @@ export interface IThemeState {
 const initialState: IThemeState = {
   color: getExistedOne(
     getLocalStorage(localStorageNames.themeColor),
-    "light"
+    "dark"
   ) as IThemeState["color"],
 };
 

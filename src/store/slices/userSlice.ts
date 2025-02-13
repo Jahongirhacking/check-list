@@ -29,7 +29,7 @@ const userSlice = createSlice({
   ) as IUserState,
   reducers: {
     login: (state, action: PayloadAction<IUserState>) => {
-      state = { ...state, ...action.payload };
+      state = { ...state, first_name: "", last_name: "", ...action.payload };
       setLocalStorage(localStorageNames.user, state);
       return state;
     },

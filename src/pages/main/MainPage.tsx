@@ -8,13 +8,13 @@ import TaskContainer from '../../components/task/TaskContainer'
 import { addTask } from '../../store/slices/taskSlice'
 import { RootState } from '../../store/store'
 import { IGeneralTaskProps } from '../../types'
+import { generateTaskImage } from '../../utils/taskUtils'
 import ChooseTaskType from './components/ChooseTaskType'
 import InitialAddTaskButton from './components/InitialAddTaskButton'
 import MainCard from './components/MainCard'
 import './style.scss'
 
 const MainPage = () => {
-    const IMAGES_LENGTH = 5;
     const [step, setStep] = useState(0);
     const [data, setData] = useState({});
     const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const MainPage = () => {
         { label: 'Kundalik', value: 'daily' },
         { label: 'Boshqa', value: 'other' },
     ]
+    const [taskType, setTaskType] = useState(taskOptions[0].value);
 
     const handleAddTask = (taskData: IGeneralTaskProps | object | undefined) => {
         dispatch(addTask({
@@ -35,22 +36,26 @@ const MainPage = () => {
             isCountable: (taskData as IGeneralTaskProps)?.type === 'sport' ? true : (taskData as IGeneralTaskProps)?.isCountable,
             createdAt: moment().unix(),
             order: tasks?.length ?? 0,
-            img: `/images/${(taskData as IGeneralTaskProps)?.type}/${Math.floor(Math.random() * IMAGES_LENGTH) + 1}.jpg`,
+            img: generateTaskImage((taskData as IGeneralTaskProps)?.type),
             current: 0,
         }))
         setStep(0);
     }
+
+
+    const sortedTasks = tasks.filter((task) => taskType === 'all' || task.type === taskType);
 
     return (
         <Flex vertical className='frame' gap={18}>
             <Segmented
                 size='small'
                 options={taskOptions}
-
+                value={taskType}
+                onChange={(value) => setTaskType(value)}
             />
             <Flex vertical gap={8}>
                 {
-                    tasks?.filter(task => !task.isDone)?.map(task => (
+                    sortedTasks?.filter(task => !task.isDone)?.map(task => (
                         <MainCard key={task?.id} task={task} />
                     ))
                 }
@@ -73,12 +78,12 @@ const MainPage = () => {
                 </ControlledFlow>
             </Card>
             {
-                !!tasks?.filter(task => task.isDone).length && (
+                !!sortedTasks?.filter(task => task.isDone).length && (
                     <>
                         <Divider>Bajarilgan mashg'ulotlar</Divider>
                         <Flex vertical gap={8}>
                             {
-                                tasks?.filter(task => task.isDone)?.map(task => (
+                                sortedTasks?.filter(task => task.isDone)?.map(task => (
                                     <MainCard key={task?.id} task={task} />
                                 ))
                             }

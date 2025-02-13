@@ -42,7 +42,15 @@ function App() {
         isReady ? (
           <RouterElement />
         ) : (
-          <LoadingOutlined style={{ fontSize: 50, margin: 'auto' }} />
+          <LoadingOutlined
+            style={{
+              fontSize: 70,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100dvh',
+              color: '#006d75',
+            }} />
         )
       }
     </>

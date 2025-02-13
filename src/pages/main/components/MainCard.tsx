@@ -22,6 +22,7 @@ const MainCard = ({ task }: { task: IGeneralTaskProps }) => {
     const handleMakeTaskDone = (id: IGeneralTaskProps['id'], isDone: boolean) => {
         dispatch(editTask({ id, isDone }));
     }
+
     return (
         <Card
             className={`task-card ${task?.isDone ? 'complete' : 'incomplete'}-task-card`}
