@@ -1,7 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useSearchParams } from 'react-router';
 import useGistHooks from '../../hooks/useGistHooks';
@@ -39,10 +39,10 @@ const CallbackHandler = () => {
         }
     }
 
-    const getTasks = useCallback(async () => {
+    const getTasks = async () => {
         const content = await readGistData();
         console.log("content", content);
-    }, [readGistData])
+    }
 
     useEffect(() => {
         if (searchParams.has('id')) {
@@ -54,7 +54,7 @@ const CallbackHandler = () => {
             setSuccess(true);
             message.success("Tizimga muvaffaqiyatli kirdingiz!")
         }
-    }, [searchParams, dispatch, getTasks])
+    }, [searchParams, dispatch])
 
     return (
         <>
