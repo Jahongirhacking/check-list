@@ -30,7 +30,9 @@ function App() {
   const { manageGist } = useGistHooks(user);
 
   useEffect(() => {
-    manageGist({ tasks });
+    if (user?.id) {
+      manageGist({ tasks });
+    }
   }, [tasks])
 
   useEffect(() => {

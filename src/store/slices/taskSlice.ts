@@ -116,6 +116,12 @@ const userSlice = createSlice({
       setLocalStorage(localStorageNames.tasks, state.tasks);
       return state;
     },
+
+    setTasks: (state, action: PayloadAction<IGeneralTaskProps[]>) => {
+      state.tasks = action.payload;
+      setLocalStorage(localStorageNames.tasks, state.tasks);
+      return state;
+    },
   },
 });
 
@@ -128,6 +134,7 @@ export const {
   resetTask,
   resetAllTask,
   editTask,
+  setTasks,
 } = userSlice.actions;
 
 export default userSlice.reducer;

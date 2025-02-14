@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useSearchParams } from 'react-router';
 import useGistHooks from '../../hooks/useGistHooks';
 import { paths } from '../../routes/paths';
+import { setTasks } from '../../store/slices/taskSlice';
 import { login } from '../../store/slices/userSlice';
 import { RootState } from '../../store/store';
 
@@ -40,8 +41,14 @@ const CallbackHandler = () => {
     }
 
     const getTasks = async () => {
-        const content = await readGistData();
-        console.log("content", content);
+        try {
+            const content = await readGistData();
+            if (content && content.tasks.length > 0) {
+                dispatch(setTasks(content.tasks));
+            }
+        } catch (err) {
+            console.error("empty content", err);
+        }
     }
 
     useEffect(() => {
