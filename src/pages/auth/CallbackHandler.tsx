@@ -42,7 +42,9 @@ const CallbackHandler = () => {
 
     const getTasks = async (id: string) => {
         try {
+            console.log(id);
             const content = await readGistData(id);
+            console.log(content);
             if (content && content.tasks.length > 0) {
                 dispatch(setTasks(content.tasks));
             }

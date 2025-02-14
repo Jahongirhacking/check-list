@@ -91,7 +91,9 @@ const useGistHooks = (user: IUserState) => {
         // Make a GET request to the Gist API
         const response = await axios.post(getGistByIdUrl, { gistId: gist?.id });
         // Parse the content of the specified file (database.json in this case)
-        const gistContent = JSON.parse(response.data.files[FILE_NAME].content);
+        const gistContent = JSON.parse(
+          response.data.files[id ? `${id}.json` : FILE_NAME].content
+        );
         console.log("📝 Gist Data:", gistContent);
         return gistContent; // Return the parsed JSON data
       } catch (error) {
