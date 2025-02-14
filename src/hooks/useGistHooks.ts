@@ -65,17 +65,22 @@ const useGistHooks = (user: IUserState) => {
     [user?.id]
   );
 
+  const checkGistExist = useCallback(async () => {
+    const gist = await getGistByName(FILE_NAME);
+    return gist;
+  }, [FILE_NAME, getGistByName]);
+
   // Function to manage Gists (check if exists, update or create)
   const manageGist = useCallback(
     async (newData: object) => {
-      const gist = await getGistByName(FILE_NAME);
+      const gist = await checkGistExist();
       if (gist) {
         await updateGist(gist.id, newData); // Update if found
       } else {
         await createGist(newData); // Create a new Gist if not found
       }
     },
-    [FILE_NAME, updateGist, createGist, getGistByName]
+    [updateGist, createGist, checkGistExist]
   );
 
   // Function to read JSON data from the Gist
@@ -93,6 +98,7 @@ const useGistHooks = (user: IUserState) => {
         "❌ Error reading Gist:",
         error.response?.data || error.message
       );
+      return null;
     }
   }, [FILE_NAME, getGistByName]);
 
@@ -103,6 +109,7 @@ const useGistHooks = (user: IUserState) => {
     updateGist,
     manageGist,
     readGistData,
+    checkGistExist,
   };
 };
 
