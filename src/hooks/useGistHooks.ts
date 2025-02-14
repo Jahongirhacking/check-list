@@ -84,23 +84,26 @@ const useGistHooks = (user: IUserState) => {
   );
 
   // Function to read JSON data from the Gist
-  const readGistData = useCallback(async () => {
-    try {
-      const gist = await getGistByName(FILE_NAME);
-      // Make a GET request to the Gist API
-      const response = await axios.post(getGistByIdUrl, { gistId: gist?.id });
-      // Parse the content of the specified file (database.json in this case)
-      const gistContent = JSON.parse(response.data.files[FILE_NAME].content);
-      console.log("📝 Gist Data:", gistContent);
-      return gistContent; // Return the parsed JSON data
-    } catch (error) {
-      console.error(
-        "❌ Error reading Gist:",
-        error.response?.data || error.message
-      );
-      return null;
-    }
-  }, [FILE_NAME, getGistByName]);
+  const readGistData = useCallback(
+    async (id: string) => {
+      try {
+        const gist = await getGistByName(id ? `${id}.json` : FILE_NAME);
+        // Make a GET request to the Gist API
+        const response = await axios.post(getGistByIdUrl, { gistId: gist?.id });
+        // Parse the content of the specified file (database.json in this case)
+        const gistContent = JSON.parse(response.data.files[FILE_NAME].content);
+        console.log("📝 Gist Data:", gistContent);
+        return gistContent; // Return the parsed JSON data
+      } catch (error) {
+        console.error(
+          "❌ Error reading Gist:",
+          error.response?.data || error.message
+        );
+        return null;
+      }
+    },
+    [FILE_NAME, getGistByName]
+  );
 
   // Return all functions
   return {

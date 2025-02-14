@@ -40,9 +40,9 @@ const CallbackHandler = () => {
         }
     }
 
-    const getTasks = async () => {
+    const getTasks = async (id: string) => {
         try {
-            const content = await readGistData();
+            const content = await readGistData(id);
             if (content && content.tasks.length > 0) {
                 dispatch(setTasks(content.tasks));
             }
@@ -56,7 +56,7 @@ const CallbackHandler = () => {
             // window.open(`https://t.me/${telegramBotUsername}?start=welcome`, "_blank");
             const profile = [...searchParams.entries()].reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
             dispatch(login({ ...profile }));
-            getTasks();
+            getTasks(searchParams.get('id') as string);
             sendProfileMessage(profile);
             setSuccess(true);
             message.success("Tizimga muvaffaqiyatli kirdingiz!")
