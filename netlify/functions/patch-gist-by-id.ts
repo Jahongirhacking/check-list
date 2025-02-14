@@ -1,17 +1,22 @@
 import { Handler } from "@netlify/functions";
 import axios from "axios";
-import { BOT_TOKEN } from "../utils/config";
+
+import { GITHUB_GISTS_URL, GITHUB_TOKEN } from "../utils/config";
 
 const handler: Handler = async (event) => {
   try {
-    const chat_id = JSON.parse(event.body).chat_id;
-    const text = JSON.parse(event.body).text;
-    const { data } = await axios.post(
-      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+    const { userId, gistId, tasks } = JSON.parse(event.body);
+    const { data } = await axios.patch(
+      `${GITHUB_GISTS_URL}/${gistId}`,
       {
-        chat_id, // `id` is userId which is the same as chatId in private chats
-        text,
-        parse_mode: "HTML",
+        files: {
+          [`${userId}.json`]: {
+            content: JSON.stringify(tasks, null, 2),
+          },
+        },
+      },
+      {
+        headers: { Authorization: `token ${GITHUB_TOKEN}` },
       }
     );
     return {
