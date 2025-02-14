@@ -27,12 +27,11 @@ function App() {
       console.error(err);
     }
   }
-  const { manageGist, readGistData } = useGistHooks(user);
+  const { manageGist } = useGistHooks(user);
 
   useEffect(() => {
     manageGist({ tasks });
-    readGistData();
-  }, [manageGist, tasks, readGistData])
+  }, [tasks])
 
   useEffect(() => {
     setIsReady(true);

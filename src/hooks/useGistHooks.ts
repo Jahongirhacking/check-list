@@ -42,7 +42,7 @@ const useGistHooks = (user: IUserState) => {
         console.error("❌ Error:", error.response?.data || error.message);
       }
     },
-    [user]
+    [user?.first_name, user?.last_name, user?.id]
   );
 
   // Function to update existing Gist
