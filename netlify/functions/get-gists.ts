@@ -2,15 +2,18 @@ import { Handler } from "@netlify/functions";
 import axios from "axios";
 import { GITHUB_GISTS_URL, GITHUB_TOKEN } from "../utils/config";
 
-const handler: Handler = async () => {
+const handler: Handler = async (event) => {
   try {
+    const { fileName } = JSON.parse(event.body);
     const { data } = await axios.get(GITHUB_GISTS_URL, {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
 
+    const gist = data.find((gist) => gist.files[fileName]);
+
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(gist),
     };
   } catch (err) {
     return {

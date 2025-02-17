@@ -10,7 +10,7 @@ const handler: Handler = async (event) => {
       GITHUB_GISTS_URL,
       {
         description: `${firstname} ${lastname}'s checklist`,
-        public: true,
+        public: false,
         files: {
           [`${userId}.json`]: {
             content: JSON.stringify(tasks, null, 2),

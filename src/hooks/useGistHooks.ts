@@ -14,9 +14,8 @@ const useGistHooks = (user: IUserState) => {
   // Function to get Gist by file name
   const getGistByName = useCallback(async (fileName: string) => {
     try {
-      const response = await axios.get(getGistsUrl);
-      const gist = response.data.find((gist) => gist.files[fileName]);
-      return gist; // Return the Gist object if found, otherwise undefined
+      const { data } = await axios.post(getGistsUrl, { fileName });
+      return data; // Return the Gist object if found, otherwise undefined
     } catch (error) {
       console.error(
         "Error fetching Gists:",
