@@ -14,7 +14,7 @@ body {
 
   .frame {
     width: 100%;
-    max-width: 1000px;
+    max-width: 700px;
   }
 }
 
@@ -102,13 +102,14 @@ body {
   }
 
   .add-task-card {
-    background-color: #ffffffcc;
+    background-color: #ffffffbc;
     backdrop-filter: blur(2px);
+    border: 1px solid #141414;
   }
 }
 
 .complete-task-card {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .dark-theme {
@@ -148,7 +149,7 @@ body {
     }
 
     .add-task-card {
-      background-color: #000000cc;
+      background-color: #000000b8;
       svg {
         circle {
           &:first-child {

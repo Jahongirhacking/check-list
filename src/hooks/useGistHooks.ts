@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { setTasks } from "../store/slices/taskSlice";
 import { IUserState } from "../store/slices/userSlice";
 import {
   getGistByIdUrl,
@@ -10,6 +12,7 @@ import {
 
 const useGistHooks = (user: IUserState) => {
   const FILE_NAME = `${user?.id}.json`;
+  const dispatch = useDispatch();
 
   // Function to get Gist by file name
   const getGistByName = useCallback(async (fileName: string) => {
@@ -84,7 +87,7 @@ const useGistHooks = (user: IUserState) => {
 
   // Function to read JSON data from the Gist
   const readGistData = useCallback(
-    async (id: string) => {
+    async (id: number) => {
       try {
         const gist = await getGistByName(id ? `${id}.json` : FILE_NAME);
         // Make a GET request to the Gist API
@@ -106,6 +109,18 @@ const useGistHooks = (user: IUserState) => {
     [FILE_NAME, getGistByName]
   );
 
+  const getTasks = useCallback(async () => {
+    try {
+      if (!user?.id) return;
+      const content = await readGistData(user?.id);
+      if (content && content.tasks.length > 0) {
+        dispatch(setTasks(content.tasks));
+      }
+    } catch (err) {
+      console.error("empty content", err);
+    }
+  }, [user?.id]);
+
   // Return all functions
   return {
     getGistByName,
@@ -114,6 +129,7 @@ const useGistHooks = (user: IUserState) => {
     manageGist,
     readGistData,
     checkGistExist,
+    getTasks,
   };
 };
 

@@ -1,10 +1,11 @@
 import { Card, Divider, Flex, Segmented } from 'antd'
 import moment from 'moment'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import ControlledFlow from '../../components/flow/ControlledFlow'
 import TaskContainer from '../../components/task/TaskContainer'
+import useGistHooks from '../../hooks/useGistHooks'
 import { addTask } from '../../store/slices/taskSlice'
 import { RootState } from '../../store/store'
 import { IGeneralTaskProps } from '../../types'
@@ -19,6 +20,7 @@ const MainPage = () => {
     const [data, setData] = useState({});
     const dispatch = useDispatch();
     const tasks = useSelector((store: RootState) => store.task)?.tasks;
+    const user = useSelector((store: RootState) => store.user);
     const taskOptions: { label: string, value: IGeneralTaskProps['type'] | 'all' }[] = [
         { label: 'Hammasi', value: 'all' },
         { label: 'Sport', value: 'sport' },
@@ -27,6 +29,8 @@ const MainPage = () => {
         { label: 'Boshqa', value: 'other' },
     ]
     const [taskType, setTaskType] = useState(taskOptions[0].value);
+
+    const { getTasks } = useGistHooks(user);
 
     const handleAddTask = (taskData: IGeneralTaskProps | object | undefined) => {
         dispatch(addTask({
@@ -42,8 +46,11 @@ const MainPage = () => {
         setStep(0);
     }
 
-
     const sortedTasks = tasks.filter((task) => taskType === 'all' || task.type === taskType);
+
+    useEffect(() => {
+        getTasks();
+    }, [getTasks])
 
     return (
         <Flex vertical className='frame' gap={18}>

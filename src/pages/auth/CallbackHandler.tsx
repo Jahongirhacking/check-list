@@ -2,20 +2,15 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Navigate, useSearchParams } from 'react-router';
-import useGistHooks from '../../hooks/useGistHooks';
 import { paths } from '../../routes/paths';
-import { setTasks } from '../../store/slices/taskSlice';
 import { login } from '../../store/slices/userSlice';
-import { RootState } from '../../store/store';
 
 const CallbackHandler = () => {
     const [searchParams] = useSearchParams();
     const [success, setSuccess] = useState(false);
     const dispatch = useDispatch();
-    const user = useSelector((store: RootState) => store.user);
-    const { readGistData } = useGistHooks(user);
 
     const sendProfileMessage = async (profile: object) => {
         let msg = '';
@@ -40,25 +35,11 @@ const CallbackHandler = () => {
         }
     }
 
-    const getTasks = async (id: string) => {
-        try {
-            console.log(id);
-            const content = await readGistData(id);
-            console.log(content);
-            if (content && content.tasks.length > 0) {
-                dispatch(setTasks(content.tasks));
-            }
-        } catch (err) {
-            console.error("empty content", err);
-        }
-    }
-
     useEffect(() => {
         if (searchParams.has('id')) {
             // window.open(`https://t.me/${telegramBotUsername}?start=welcome`, "_blank");
             const profile = [...searchParams.entries()].reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
             dispatch(login({ ...profile }));
-            getTasks(searchParams.get('id') as string);
             sendProfileMessage(profile);
             setSuccess(true);
             message.success("Tizimga muvaffaqiyatli kirdingiz!")

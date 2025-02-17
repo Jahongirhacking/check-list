@@ -29,6 +29,23 @@
 
       li {
         margin: 8px 0 !important;
+        position: relative;
+
+        span {
+          cursor: auto;
+
+          button {
+            position: static;
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+            }
+          }
+        }
       }
     }
   }
