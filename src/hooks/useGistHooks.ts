@@ -15,23 +15,28 @@ const useGistHooks = (user: IUserState) => {
   const dispatch = useDispatch();
 
   // Function to get Gist by file name
-  const getGistByName = useCallback(async (fileName: string) => {
-    try {
-      const { data } = await axios.post(getGistsUrl, { fileName });
-      return data; // Return the Gist object if found, otherwise undefined
-    } catch (error) {
-      console.error(
-        "Error fetching Gists:",
-        error.response?.data || error.message
-      );
-      return null;
-    }
-  }, []);
+  const getGistByName = useCallback(
+    async (fileName: string) => {
+      try {
+        if (!user?.id) return null;
+        const { data } = await axios.post(getGistsUrl, { fileName });
+        return data; // Return the Gist object if found, otherwise undefined
+      } catch (error) {
+        console.error(
+          "Error fetching Gists:",
+          error.response?.data || error.message
+        );
+        return null;
+      }
+    },
+    [user?.id]
+  );
 
   // Function to create a new Gist
   const createGist = useCallback(
     async (newData: object) => {
       try {
+        if (!user?.id) return;
         const response = await axios.post(postGistUrl, {
           firstname: user?.first_name,
           lastname: user?.last_name,
@@ -51,6 +56,7 @@ const useGistHooks = (user: IUserState) => {
   const updateGist = useCallback(
     async (gistId: string, newData: object) => {
       try {
+        if (!user?.id) return;
         const response = await axios.patch(patchGistUrl, {
           gistId,
           tasks: newData,
