@@ -36,14 +36,12 @@ const userSlice = createSlice({
       ) as Required<IGeneralTaskProps>;
       if (task?.type === "sport") {
         const sportTask = task as Required<ISportTaskProps>;
-        if (sportTask.current >= sportTask.totalSets) return state;
         sportTask.current += 1;
         if (sportTask.current >= sportTask.totalSets) {
           sportTask.isDone = true;
         }
       } else {
         const defaultTask = task as Required<IDefaultTaskProps>;
-        if (defaultTask.current >= defaultTask.totalPart) return state;
         defaultTask.current += 1;
         if (defaultTask.current >= defaultTask.totalPart) {
           defaultTask.isDone = true;
