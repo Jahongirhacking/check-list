@@ -9,7 +9,18 @@ const handler: Handler = async (event) => {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
 
+    console.log(data);
+
     const gist = data.find((gist) => gist.files[userId]);
+
+    if (!gist) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({
+          message: "not found",
+        }),
+      };
+    }
 
     return {
       statusCode: 200,
