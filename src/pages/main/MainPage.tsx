@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import ControlledFlow from '../../components/flow/ControlledFlow'
 import TaskContainer from '../../components/task/TaskContainer'
-import useGistHooks from '../../hooks/useGistHooks'
-import { addTask } from '../../store/slices/taskSlice'
+import { useCreateGistMutation, useEditGistMutation, useGetGistMutation, useGetTasksMutation } from '../../store/slices/apiSlice'
+import { addTask, setTasks } from '../../store/slices/taskSlice'
+import { editUser } from '../../store/slices/userSlice'
 import { RootState } from '../../store/store'
 import { IGeneralTaskProps } from '../../types'
 import { generateTaskImage } from '../../utils/taskUtils'
@@ -21,6 +22,10 @@ const MainPage = () => {
     const dispatch = useDispatch();
     const tasks = useSelector((store: RootState) => store.task)?.tasks;
     const user = useSelector((store: RootState) => store.user);
+    const [getTasks] = useGetTasksMutation();
+    const [getGist] = useGetGistMutation();
+    const [editGist] = useEditGistMutation();
+    const [createGist] = useCreateGistMutation();
     const taskOptions: { label: string, value: IGeneralTaskProps['type'] | 'all' }[] = [
         { label: 'Hammasi', value: 'all' },
         { label: 'Sport', value: 'sport' },
@@ -29,8 +34,6 @@ const MainPage = () => {
         { label: 'Boshqa', value: 'other' },
     ]
     const [taskType, setTaskType] = useState(taskOptions[0].value);
-
-    const { getTasks } = useGistHooks(user);
 
     const handleAddTask = (taskData: IGeneralTaskProps | object | undefined) => {
         dispatch(addTask({
@@ -49,8 +52,40 @@ const MainPage = () => {
     const sortedTasks = tasks.filter((task) => taskType === 'all' || task.type === taskType);
 
     useEffect(() => {
-        getTasks();
-    }, [getTasks])
+        if (user?.id) {
+            (async () => {
+                try {
+                    const gist = await getTasks({ userId: user.id! });
+                    if (gist && "id" in gist) {
+                        const response = await getGist({ gistId: gist.id as string });
+                        const gistContent = JSON.parse(
+                            response.data.files[`${user?.id}.json`].content
+                        );
+                        console.log('gist content:', gistContent);
+                        dispatch(setTasks(gistContent));
+                    }
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    dispatch(editUser({ backupCompleted: true }));
+                }
+
+            })()
+        }
+    }, [user?.id])
+
+    useEffect(() => {
+        if (user?.backupCompleted && user?.id && tasks && tasks.length) {
+            (async () => {
+                const gist = await getTasks({ userId: user.id! });
+                if (gist && 'id' in gist) {
+                    await editGist({ gistId: gist.id as string, tasks, userId: user.id! });
+                } else {
+                    await createGist({ userId: user.id!, tasks, firstname: user.first_name ?? "", lastname: user.last_name ?? "" });
+                }
+            })()
+        }
+    }, [tasks, user.backupCompleted]);
 
     return (
         <Flex vertical className='frame' gap={18}>

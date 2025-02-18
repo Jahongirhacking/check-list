@@ -4,12 +4,12 @@ import { GITHUB_GISTS_URL, GITHUB_TOKEN } from "../utils/config";
 
 const handler: Handler = async (event) => {
   try {
-    const { fileName } = JSON.parse(event.body);
+    const { userId } = JSON.parse(event.body);
     const { data } = await axios.get(GITHUB_GISTS_URL, {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
 
-    const gist = data.find((gist) => gist.files[fileName]);
+    const gist = data.find((gist) => gist.files[userId]);
 
     return {
       statusCode: 200,

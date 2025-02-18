@@ -2,7 +2,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import useGistHooks from "./hooks/useGistHooks";
 import RouterElement from "./routes";
 import { RootState } from "./store/store";
 import { getUpdatesUrl, localStorageNames } from "./utils/config";
@@ -11,7 +10,6 @@ import { setLocalStorage } from "./utils/storageUtils";
 function App() {
   const [isReady, setIsReady] = useState(false);
   const user = useSelector((store: RootState) => store.user);
-  const tasks = useSelector((store: RootState) => store.task.tasks);
   const getChatId = async (userId: number) => {
     try {
       const { data } = await axios.get(getUpdatesUrl);
@@ -27,13 +25,6 @@ function App() {
       console.error(err);
     }
   }
-  const { manageGist } = useGistHooks(user);
-
-  useEffect(() => {
-    if (user?.id) {
-      manageGist({ tasks });
-    }
-  }, [tasks])
 
   useEffect(() => {
     setIsReady(true);

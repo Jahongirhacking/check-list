@@ -37,7 +37,7 @@ export const generateGeneralTasksMessage = (
     }
   });
   if (!sports.length && !sciences.length && !dailies.length && !others.length) {
-    message += `<a href="https://check-todo-list.netlify.app/">Mashg‘ulot qo‘shish</a>`;
+    message += `<a href="https://checklist-bot.netlify.app/">Mashg‘ulot qo‘shish</a>`;
     return message;
   }
   if (sports.length) {
@@ -60,7 +60,7 @@ export const generateGeneralTasksMessage = (
     others.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
-  message += `<a href="https://check-todo-list.netlify.app/">Checklist</a>`;
+  message += `<a href="https://checklist-bot.netlify.app/">Checklist</a>`;
   return message;
 };
 

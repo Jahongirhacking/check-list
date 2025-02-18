@@ -14,11 +14,13 @@ export interface IUserState {
   username?: string;
   auth_date?: number;
   hash?: string;
+  backupCompleted?: boolean;
 }
 
 const initialState: IUserState = {
   first_name: "Anonim",
   last_name: "Hisob",
+  backupCompleted: false,
 };
 
 const userSlice = createSlice({
@@ -30,16 +32,20 @@ const userSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<IUserState>) => {
       state = { ...state, first_name: "", last_name: "", ...action.payload };
-      setLocalStorage(localStorageNames.user, state);
-      return state;
+      const { backupCompleted, hash, ...partialState } = state;
+      setLocalStorage(localStorageNames.user, partialState);
+      return { backupCompleted, hash, ...partialState };
     },
     logout: () => {
       setLocalStorage(localStorageNames.user, initialState);
       return initialState;
     },
+    editUser: (state, action: PayloadAction<IUserState>) => {
+      return { ...state, ...action.payload };
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, editUser } = userSlice.actions;
 
 export default userSlice.reducer;
