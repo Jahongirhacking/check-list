@@ -98,7 +98,7 @@ export const generateDefaultTask = (task: IDefaultTaskProps) => {
   return string;
 };
 
-const IMAGES_LENGTH = 5;
+const IMAGES_LENGTH = 8;
 export const generateTaskImage = (taskType: IGeneralTaskProps["type"]) => {
   return `/images/${taskType}/${
     Math.floor(Math.random() * IMAGES_LENGTH) + 1

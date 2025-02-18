@@ -61,7 +61,6 @@ const MainPage = () => {
                         const gistContent = JSON.parse(
                             response.data.files[`${user?.id}.json`].content
                         );
-                        console.log('gist content:', gistContent);
                         dispatch(setTasks(gistContent));
                     }
                 } catch (err) {
@@ -69,7 +68,6 @@ const MainPage = () => {
                 } finally {
                     dispatch(editUser({ backupCompleted: true }));
                 }
-
             })()
         }
     }, [user?.id, dispatch, getTasks, getGist])
