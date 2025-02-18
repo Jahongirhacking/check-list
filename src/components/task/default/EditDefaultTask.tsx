@@ -35,7 +35,8 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
         context?.onSubmit(context?.pushData({
             name: values?.name,
             totalPart: values?.totalPart,
-            partUnit: values?.partUnit
+            partUnit: values?.partUnit,
+            isCountable: values?.isCountable
         } as IDefaultTaskProps));
         message.success(`${taskTitle} mashgʻulot muvaffaqiyatli qoʻshildi!`);
     };
