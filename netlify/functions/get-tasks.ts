@@ -8,11 +8,7 @@ const handler: Handler = async (event) => {
     const { data } = await axios.get(GITHUB_GISTS_URL, {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
-
-    console.log(data, userId);
-
     const gist = data.find((gist) => gist.files[`${userId}.json`]);
-
     if (!gist) {
       return {
         statusCode: 404,

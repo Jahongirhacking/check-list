@@ -41,7 +41,6 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
     };
 
     const handleEdit = () => {
-        console.log(form.getFieldsValue());
         dispatch(editTask({ id: props?.id, ...form.getFieldsValue() }));
         if (setReducerName) {
             setReducerName('view');
