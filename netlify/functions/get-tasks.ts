@@ -9,9 +9,9 @@ const handler: Handler = async (event) => {
       headers: { Authorization: `token ${GITHUB_TOKEN}` },
     });
 
-    console.log(data);
+    console.log(data, userId);
 
-    const gist = data.find((gist) => gist.files[userId]);
+    const gist = data.find((gist) => gist.files[`${userId}.json`]);
 
     if (!gist) {
       return {
