@@ -72,7 +72,7 @@ const MainPage = () => {
 
             })()
         }
-    }, [user?.id])
+    }, [user?.id, dispatch, getTasks, getGist])
 
     useEffect(() => {
         if (user?.backupCompleted && user?.id && tasks && tasks.length) {
@@ -85,7 +85,7 @@ const MainPage = () => {
                 }
             })()
         }
-    }, [tasks, user.backupCompleted]);
+    }, [tasks, user.backupCompleted, editGist, createGist, getTasks, user?.first_name, user?.last_name, user?.id]);
 
     return (
         <Flex vertical className='frame' gap={18}>
