@@ -56,6 +56,7 @@ const MainPage = () => {
             (async () => {
                 try {
                     const gist = await getTasks({ userId: user.id! });
+                    console.log("gist:", gist);
                     if (gist && "id" in gist) {
                         const response = await getGist({ gistId: gist.id as string });
                         const gistContent = JSON.parse(
@@ -78,6 +79,7 @@ const MainPage = () => {
         if (user?.backupCompleted && user?.id && tasks && tasks.length) {
             (async () => {
                 const gist = await getTasks({ userId: user.id! });
+                console.log("gist:", gist);
                 if (gist && 'id' in gist) {
                     await editGist({ gistId: gist.id as string, tasks, userId: user.id! });
                 } else {
