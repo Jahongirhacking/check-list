@@ -28,12 +28,12 @@ const MainCard = ({ task }: { task: IGeneralTaskProps }) => {
             className={`task-card ${task?.isDone ? 'complete' : 'incomplete'}-task-card`}
             actions={
                 task?.isCountable ? [
-                    ...(task?.current !== 0 ? [<Button size='small' shape='circle' danger type="primary" icon={<MinusOutlined />} onClick={() => handleDecrement(task?.id)} />] : []),
-                    ...(!task?.isDone ? [<Button size='small' shape='circle' type="primary" icon={<PlusOutlined />} onClick={() => handleIncrement(task?.id)} />] : [])
+                    ...((task?.current || 0) >= 0 ? [<Button key={1} size='small' shape='circle' danger type="primary" icon={<MinusOutlined />} onClick={() => handleDecrement(task?.id)} />] : []),
+                    <Button key={2} size='small' shape='circle' type="primary" icon={<PlusOutlined />} onClick={() => handleIncrement(task?.id)} />
                 ] : [
                     ...(task?.isDone
-                        ? [<Button size='small' color="danger" shape='circle' variant='solid' icon={<CloseOutlined />} onClick={() => handleMakeTaskDone(task?.id, false)} />]
-                        : [<Button size='small' color="cyan" shape='circle' variant='solid' icon={<CheckOutlined />} onClick={() => handleMakeTaskDone(task?.id, true)} />]
+                        ? [<Button key={1} size='small' color="danger" shape='circle' variant='solid' icon={<CloseOutlined />} onClick={() => handleMakeTaskDone(task?.id, false)} />]
+                        : [<Button key={2} size='small' color="cyan" shape='circle' variant='solid' icon={<CheckOutlined />} onClick={() => handleMakeTaskDone(task?.id, true)} />]
                     ),
                 ]
             }

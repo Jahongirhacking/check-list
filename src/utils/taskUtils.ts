@@ -86,7 +86,7 @@ export const generateDefaultTask = (task: IDefaultTaskProps) => {
       task.totalPart === 0
         ? 0
         : ((task.current ?? 0) / (task.totalPart ?? 1)) * 100;
-    string += `${percent === 0 ? "🚫" : percent === 100 ? "✅" : "⚠️"} `;
+    string += `${percent === 0 ? "🚫" : percent >= 100 ? "✅" : "⚠️"} `;
   }
   string += `${!task.isCountable ? (task.isDone ? "✅" : "🚫") : ""} ${
     task.name
