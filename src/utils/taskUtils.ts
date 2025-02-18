@@ -74,7 +74,7 @@ export const generateSportTaskMessage = (task: ISportTaskProps) => {
     task.totalSets === 0
       ? 0
       : ((task.current ?? 0) / (task.totalSets ?? 1)) * 100;
-  string += `${percent === 0 ? "🚫" : percent === 100 ? "✅" : "⚠️"} `;
+  string += `${percent === 0 ? "🚫" : percent >= 100 ? "✅" : "⚠️"} `;
   string += `${task.reps} ${task.name} - <b>${task.current} / ${task.totalSets} sets</b>\n`;
   return string;
 };
