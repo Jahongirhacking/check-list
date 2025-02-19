@@ -42,7 +42,7 @@ export const generateGeneralTasksMessage = (
     !dailies.length &&
     !others.length
   ) {
-    message += `<a href="https://checklist-bot.netlify.app/">Mashg‘ulot qo‘shish</a>`;
+    message += `<a href="https://checklist-bot.netlify.app/">Create Activity</a>`;
     return message;
   }
   if (sports.length) {
@@ -65,7 +65,7 @@ export const generateGeneralTasksMessage = (
     others.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
-  message += `<a href="https://checklist-bot.netlify.app/">Checklist</a>`;
+  message += `<a href="https://checklist-bot.netlify.app/">Checklist App - Track Your Daily Progress</a>`;
   return message;
 };
 
