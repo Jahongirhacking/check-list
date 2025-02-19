@@ -136,14 +136,17 @@ const userSlice = createSlice({
       const taskIndex1 = state.tasks.findIndex(
         (task) => task.id === action.payload
       );
-      if (taskIndex1 === -1 || state.tasks[taskIndex1]?.order === 0) return;
+      if (taskIndex1 === -1 || state.tasks[taskIndex1]?.order === 0)
+        return state;
       const tempTask = state.tasks[taskIndex1];
       const taskIndex2 = state.tasks.findIndex(
         (task) => task.order === (tempTask?.order ?? 1) - 1
       );
+      if (taskIndex2 === -1) return state;
       const tempOrder = tempTask.order;
       tempTask.order = state.tasks[taskIndex2].order;
       state.tasks[taskIndex2].order = tempOrder;
+      state.tasks.sort((a, b) => a.order! - b.order!);
       setLocalStorage(localStorageNames.tasks, state.tasks);
     },
     makeDownward: (state, action: PayloadAction<IGeneralTaskProps["id"]>) => {
@@ -159,9 +162,11 @@ const userSlice = createSlice({
       const taskIndex2 = state.tasks.findIndex(
         (task) => task.order === (tempTask?.order ?? state.tasks.length - 1) + 1
       );
+      if (taskIndex2 === -1) return state;
       const tempOrder = tempTask.order;
       tempTask.order = state.tasks[taskIndex2].order;
       state.tasks[taskIndex2].order = tempOrder;
+      state.tasks.sort((a, b) => a.order! - b.order!);
       setLocalStorage(localStorageNames.tasks, state.tasks);
     },
   },
