@@ -1,14 +1,16 @@
-import { ClearOutlined, DeleteOutlined, EditOutlined, FileImageOutlined, MoreOutlined } from '@ant-design/icons';
+import { ClearOutlined, DeleteOutlined, DownOutlined, EditOutlined, FileImageOutlined, MoreOutlined, UpOutlined } from '@ant-design/icons';
 import { Button, Dropdown, MenuProps } from 'antd';
 import React, { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TaskContainer, { ITaskContainer } from '../../../components/task/TaskContainer';
 import { ITaskReducer } from '../../../components/task/TaskReducer';
-import { deleteTask, editTask, resetTask } from '../../../store/slices/taskSlice';
+import { deleteTask, editTask, makeDownward, makeUpward, resetTask } from '../../../store/slices/taskSlice';
+import { RootState } from '../../../store/store';
 import { generateTaskImage } from '../../../utils/taskUtils';
 
 const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ props, type }) => {
     const [reducerName, setReducerName] = useState<ITaskReducer['reducerName']>('view');
+    const tasks = useSelector((store: RootState) => store.task.tasks);
     const dispatch = useDispatch();
 
     const handleDelete = () => {
@@ -36,18 +38,35 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
         }))
     }
 
+    const handleUpward = () => {
+        dispatch(makeUpward(props?.id));
+    }
+
+    const handleDownward = () => {
+        dispatch(makeDownward(props?.id))
+    }
+
+
     const menuItems: MenuProps['items'] = [
+        ...((props?.order ?? 0) > 0 ? [{
+            key: 'upward',
+            label: "Upward",
+            icon: <UpOutlined />,
+            onClick: handleUpward,
+        }] : []),
         {
             key: 'edit',
             label: "Edit",
             icon: <EditOutlined />,
             onClick: handleEdit,
+            style: { color: '#f9861f' },
         },
         {
             key: 'editImage',
             label: "New image",
             icon: <FileImageOutlined />,
             onClick: handleEditImage,
+            style: { color: '#139718' },
         },
         {
             key: 'reset',
@@ -62,9 +81,14 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
             icon: <DeleteOutlined />,
             onClick: handleDelete,
             style: { color: 'red' },
-        }
+        },
+        ...((props?.order ?? 0) < tasks.length - 1 ? [{
+            key: 'downward',
+            label: "Downward",
+            icon: <DownOutlined />,
+            onClick: handleDownward,
+        }] : []),
     ]
-
 
     return (
         <TaskContainer

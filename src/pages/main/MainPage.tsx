@@ -49,7 +49,7 @@ const MainPage = () => {
         setStep(0);
     }
 
-    const sortedTasks = tasks.filter((task) => taskType === 'all' || task.type === taskType);
+    const sortedTasks = [...tasks.filter((task) => taskType === 'all' || task.type === taskType)]?.sort((a, b) => (a?.order ?? 0) - (b?.order ?? 0));
 
     useEffect(() => {
         if (user?.id) {

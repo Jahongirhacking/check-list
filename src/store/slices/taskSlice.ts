@@ -77,6 +77,11 @@ const userSlice = createSlice({
         (task) => task.id === action.payload
       );
       if (taskIndex === -1) return;
+      state.tasks.forEach((task) => {
+        if ((task.order ?? 0) > (state.tasks[taskIndex].order ?? 0)) {
+          task.order! -= 1;
+        }
+      });
       state.tasks.splice(taskIndex, 1);
       setLocalStorage(localStorageNames.tasks, state.tasks);
     },
@@ -127,6 +132,38 @@ const userSlice = createSlice({
       setLocalStorage(localStorageNames.tasks, state.tasks);
       return state;
     },
+    makeUpward: (state, action: PayloadAction<IGeneralTaskProps["id"]>) => {
+      const taskIndex1 = state.tasks.findIndex(
+        (task) => task.id === action.payload
+      );
+      if (taskIndex1 === -1 || state.tasks[taskIndex1]?.order === 0) return;
+      const tempTask = state.tasks[taskIndex1];
+      const taskIndex2 = state.tasks.findIndex(
+        (task) => task.order === (tempTask?.order ?? 1) - 1
+      );
+      const tempOrder = tempTask.order;
+      tempTask.order = state.tasks[taskIndex2].order;
+      state.tasks[taskIndex2].order = tempOrder;
+      setLocalStorage(localStorageNames.tasks, state.tasks);
+    },
+    makeDownward: (state, action: PayloadAction<IGeneralTaskProps["id"]>) => {
+      const taskIndex1 = state.tasks.findIndex(
+        (task) => task.id === action.payload
+      );
+      if (
+        taskIndex1 === -1 ||
+        state.tasks[taskIndex1]?.order === state.tasks.length - 1
+      )
+        return;
+      const tempTask = state.tasks[taskIndex1];
+      const taskIndex2 = state.tasks.findIndex(
+        (task) => task.order === (tempTask?.order ?? state.tasks.length - 1) + 1
+      );
+      const tempOrder = tempTask.order;
+      tempTask.order = state.tasks[taskIndex2].order;
+      state.tasks[taskIndex2].order = tempOrder;
+      setLocalStorage(localStorageNames.tasks, state.tasks);
+    },
   },
 });
 
@@ -140,6 +177,8 @@ export const {
   resetAllTask,
   editTask,
   setTasks,
+  makeDownward,
+  makeUpward,
 } = userSlice.actions;
 
 export default userSlice.reducer;
