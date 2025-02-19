@@ -42,7 +42,7 @@ const CallbackHandler = () => {
             dispatch(login({ ...profile }));
             sendProfileMessage(profile);
             setSuccess(true);
-            message.success("Tizimga muvaffaqiyatli kirdingiz!")
+            message.success("Login is successful!")
         }
     }, [searchParams, dispatch])
 

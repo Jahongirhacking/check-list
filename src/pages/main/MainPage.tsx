@@ -27,11 +27,11 @@ const MainPage = () => {
     const [editGist] = useEditGistMutation();
     const [createGist] = useCreateGistMutation();
     const taskOptions: { label: string, value: IGeneralTaskProps['type'] | 'all' }[] = [
-        { label: 'Hammasi', value: 'all' },
+        { label: 'All', value: 'all' },
         { label: 'Sport', value: 'sport' },
-        { label: 'Ilmiy', value: 'science' },
-        { label: 'Kundalik', value: 'daily' },
-        { label: 'Boshqa', value: 'other' },
+        { label: 'Learning', value: 'learning' },
+        { label: 'Daily', value: 'daily' },
+        { label: 'Other', value: 'other' },
     ]
     const [taskType, setTaskType] = useState(taskOptions[0].value);
 
@@ -120,7 +120,7 @@ const MainPage = () => {
             {
                 !!sortedTasks?.filter(task => task.isDone).length && (
                     <>
-                        <Divider>Bajarilgan mashg'ulotlar</Divider>
+                        <Divider>Completed activities</Divider>
                         <Flex vertical gap={8}>
                             {
                                 sortedTasks?.filter(task => task.isDone)?.map(task => (

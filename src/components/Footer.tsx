@@ -1,8 +1,9 @@
-import { ClearOutlined, DeleteFilled, HeartFilled, UploadOutlined } from '@ant-design/icons'
+import { ClearOutlined, DeleteFilled, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, message, Typography } from 'antd'
 import axios from 'axios'
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ThunderEmoji } from '../assets/icons'
 import TelegramLoginButton from '../pages/auth/TelegramLoginButton'
 import { deleteAllTask, resetAllTask } from '../store/slices/taskSlice'
 import { RootState } from '../store/store'
@@ -21,21 +22,21 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                 chat_id: getLocalStorage(localStorageNames.chat_id) ?? user?.id,
                 text: generateGeneralTasksMessage(tasks)
             });
-            message.success("Xabar muvaffaqiyatli yuborildi!")
+            message.success("Message is sent successfully!")
         } catch (err) {
-            message.warning("Xabar yuborishda xatolik")
+            message.warning("Error on sending message")
             console.error(err);
         }
     }
 
     const handleDeleteAll = () => {
-        if (window.confirm("Siz barcha mashg'ulotlarni o'chirmoqchimisiz ya'ni ularni keyin qayta tiklay olmaysiz, shunga rozimisiz?")) {
+        if (window.confirm("Are you sure you want to delete all your workouts so you can't restore them later?")) {
             dispatch(deleteAllTask());
         }
     }
 
     const handleResetAll = () => {
-        if (window.confirm("Siz barcha mashg'ulotlarni tozalamoqchimisiz ya'ni barcha mashg'ulot ko'rsatkichlari boshlang'ich holatiga o'tadi, shunga rozimisiz?")) {
+        if (window.confirm("Do you want to clear all training sessions, meaning all training metrics will be reset? Are you okay with that?")) {
             dispatch(resetAllTask());
         }
     }
@@ -54,11 +55,11 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                         user?.id ? (
                             <Button
                                 type='primary'
-                                icon={<UploadOutlined />}
+                                icon={<SendOutlined />}
                                 iconPosition='end'
                                 onClick={handleSend}
                             >
-                                Telegramga yuborish
+                                Send via Telegram
                             </Button>
                         ) : (
                             <TelegramLoginButton />
@@ -72,9 +73,12 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                         onClick={handleResetAll}
                     />
                 </Flex>
-                <Typography.Text style={{ textAlign: 'center' }}>
-                    <a href='https://jahongirhacking.netlify.app/'>Jahongir Hayitov</a>dan sizga taqdim etildi <HeartFilled style={{ color: '#ff2e53' }} />
-                </Typography.Text>
+                <Flex align='center' gap={6}>
+                    <Typography.Text style={{ textAlign: 'center' }}>
+                        Developed for you by <a href='https://jahongirhacking.netlify.app/'>Jahongir Hayitov</a>
+                    </Typography.Text>
+                    <img width={18} src={ThunderEmoji} />
+                </Flex>
             </Flex>
         </footer>
     )

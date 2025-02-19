@@ -21,7 +21,7 @@ const Navbar: FC<Omit<FlexProps, 'children'>> = (props) => {
                 <Flex gap={12} align='center'>
                     <Dropdown
                         trigger={user?.id ? ['click'] : []}
-                        menu={{ items: [{ label: <Button danger icon={<LogoutOutlined />} onClick={handleLogout}>Chiqish</Button>, key: 'exit' }] }}
+                        menu={{ items: [{ label: <Button danger icon={<LogoutOutlined />} onClick={handleLogout}>Logout</Button>, key: 'exit' }] }}
                     >
                         <Avatar src={user?.photo_url} size="large">{`${user?.first_name![0]}${user?.last_name![0]}`}</Avatar>
                     </Dropdown>

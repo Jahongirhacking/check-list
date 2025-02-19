@@ -13,15 +13,15 @@ const ChooseTaskType = () => {
             value: 'sport',
         },
         {
-            label: <Typography.Text strong>Ilmiy 📚</Typography.Text>,
-            value: 'science',
+            label: <Typography.Text strong>Learning 📚</Typography.Text>,
+            value: 'learning',
         },
         {
-            label: <Typography.Text strong>Kundalik ish 🧹</Typography.Text>,
+            label: <Typography.Text strong>Daily 🧹</Typography.Text>,
             value: 'daily',
         },
         {
-            label: <Typography.Text strong>Boshqa 🤷‍♂️</Typography.Text>,
+            label: <Typography.Text strong>Other 🍿</Typography.Text>,
             value: 'other',
         },
     ];
@@ -34,7 +34,7 @@ const ChooseTaskType = () => {
 
     return (
         <Flex vertical gap={12} className='choose-task-type'>
-            <Typography.Text strong>Mashg'ulot turini tanlang:</Typography.Text>
+            <Typography.Text strong>Choose the type of activity:</Typography.Text>
             <Flex vertical gap={8}>
                 {
                     types.map(t => (

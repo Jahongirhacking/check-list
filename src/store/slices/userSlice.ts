@@ -18,8 +18,8 @@ export interface IUserState {
 }
 
 const initialState: IUserState = {
-  first_name: "Anonim",
-  last_name: "Hisob",
+  first_name: "Anonym",
+  last_name: "User",
   backupCompleted: false,
 };
 

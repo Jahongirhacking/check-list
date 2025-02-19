@@ -16,7 +16,7 @@ const InitialAddTaskButton = () => {
             <Button type='text' style={{ display: 'block', height: 'auto' }} onClick={handleClickBtn}>
                 <UploadIconSVG />
             </Button>
-            <Button type='primary' icon={<PlusOutlined />} onClick={handleClickBtn}>Mashg'ulot yaratish</Button>
+            <Button type='primary' icon={<PlusOutlined />} onClick={handleClickBtn}>Create activity</Button>
         </Flex>
     )
 }

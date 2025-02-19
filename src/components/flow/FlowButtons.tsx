@@ -17,10 +17,10 @@ const FlowButtons = ({ handleClickNextButton = () => { }, disabled = false, ...p
     return (
         <Flex className="flow-btns" gap={12} wrap align='center' justify='right' {...props}>
             <Button onClick={handlePrevBtn}>
-                Orqaga
+                Back
             </Button>
             <Button type="primary" onClick={handleNextBtn} htmlType="submit" disabled={disabled}>
-                Qo'shish
+                Add
             </Button>
         </Flex>
     )

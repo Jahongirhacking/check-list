@@ -1,6 +1,6 @@
 export interface IGeneralTaskProps {
   id?: string;
-  type?: "sport" | "science" | "daily" | "other";
+  type?: "sport" | "learning" | "daily" | "other";
   isDone?: boolean;
   isCountable?: boolean;
   createdAt?: number;

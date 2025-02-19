@@ -39,26 +39,26 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
     const menuItems: MenuProps['items'] = [
         {
             key: 'edit',
-            label: "O'zgartirish",
+            label: "Edit",
             icon: <EditOutlined />,
             onClick: handleEdit,
         },
         {
             key: 'editImage',
-            label: "Yangi rasm",
+            label: "New image",
             icon: <FileImageOutlined />,
             onClick: handleEditImage,
         },
         {
             key: 'reset',
-            label: "Tozalash",
+            label: "Reset",
             icon: <ClearOutlined />,
             onClick: handleReset,
             style: { color: '#13c2c2' },
         },
         {
             key: 'delete',
-            label: "O'chirish",
+            label: "Delete",
             icon: <DeleteOutlined />,
             onClick: handleDelete,
             style: { color: 'red' },

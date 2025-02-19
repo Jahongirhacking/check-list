@@ -27,3 +27,5 @@ export const UploadIconSVG = () => (
         </defs>
     </svg>
 )
+
+export { default as ThunderEmoji } from './thunder.gif'

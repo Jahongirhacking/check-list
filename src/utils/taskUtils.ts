@@ -13,7 +13,7 @@ export const generateGeneralTasksMessage = (
   message += `${moment().format("📅 DD.MM.YYYY - dddd - HH:mm")}`;
   message += "\n\n";
   const sports: ISportTaskProps[] = [];
-  const sciences: IDefaultTaskProps[] = [];
+  const learnings: IDefaultTaskProps[] = [];
   const dailies: IDefaultTaskProps[] = [];
   const others: IDefaultTaskProps[] = [];
   tasks.forEach((task) => {
@@ -22,8 +22,8 @@ export const generateGeneralTasksMessage = (
         sports.push(task);
         break;
       }
-      case "science": {
-        sciences.push(task);
+      case "learning": {
+        learnings.push(task);
         break;
       }
       case "daily": {
@@ -36,27 +36,32 @@ export const generateGeneralTasksMessage = (
       }
     }
   });
-  if (!sports.length && !sciences.length && !dailies.length && !others.length) {
+  if (
+    !sports.length &&
+    !learnings.length &&
+    !dailies.length &&
+    !others.length
+  ) {
     message += `<a href="https://checklist-bot.netlify.app/">Mashg‘ulot qo‘shish</a>`;
     return message;
   }
   if (sports.length) {
-    message += `<b>Sport mashg‘ulotlari:</b>\n`;
+    message += `<b>Sport activities:</b>\n`;
     sports.forEach((task) => (message += generateSportTaskMessage(task)));
     message += "\n";
   }
-  if (sciences.length) {
-    message += `<b>Ilmiy mashg‘ulotlar:</b>\n`;
-    sciences.forEach((task) => (message += generateDefaultTask(task)));
+  if (learnings.length) {
+    message += `<b>Learning activities:</b>\n`;
+    learnings.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
   if (dailies.length) {
-    message += `<b>Kunlik mashg‘ulotlar:</b>\n`;
+    message += `<b>Daily activities:</b>\n`;
     dailies.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
   if (others.length) {
-    message += `<b>Boshqa mashg‘ulotlar:</b>\n`;
+    message += `<b>Other activities:</b>\n`;
     others.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
