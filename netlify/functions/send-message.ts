@@ -12,7 +12,9 @@ const handler: Handler = async (event) => {
         chat_id, // `id` is userId which is the same as chatId in private chats
         text,
         parse_mode: "HTML",
-        has_large_media: false,
+        link_preview_options: JSON.stringify({
+          prefer_small_media: true,
+        }),
         // disable_web_page_preview: true,
       }
     );
