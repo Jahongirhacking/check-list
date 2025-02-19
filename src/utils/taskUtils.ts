@@ -65,7 +65,7 @@ export const generateGeneralTasksMessage = (
     others.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
-  message += `<a href="https://checklist-bot.netlify.app/">Checklist App - Track Your Daily Progress</a>`;
+  message += `<a href="https://checklist-bot.netlify.app/">Checklist App - Track Your Activities</a>`;
   return message;
 };
 
