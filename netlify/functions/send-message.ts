@@ -12,6 +12,7 @@ const handler: Handler = async (event) => {
         chat_id, // `id` is userId which is the same as chatId in private chats
         text,
         parse_mode: "HTML",
+        disable_web_page_preview: true,
       }
     );
     return {
