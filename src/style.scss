@@ -112,6 +112,38 @@ body {
   opacity: 0.6;
 }
 
+.animated-element {
+  .animated-element-content {
+    display: block;
+    opacity: 0;
+    filter: blur(4px);
+    animation: fade-in 0.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
+
+    // Add a delay based on the index of the span element
+    @for $i from 1 through 100 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.3s;
+      }
+    }
+  }
+}
+
+@keyframes growAnimation {
+  0% {
+    max-height: 0px;
+  }
+  100% {
+    max-height: 600px;
+  }
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 .dark-theme {
   background-color: rgb(46, 46, 46);
 

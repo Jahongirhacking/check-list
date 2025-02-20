@@ -24,26 +24,28 @@ const MainCard = ({ task }: { task: IGeneralTaskProps }) => {
     }
 
     return (
-        <Card
-            className={`task-card ${task?.isDone ? 'complete' : 'incomplete'}-task-card`}
-            actions={
-                task?.isCountable ? [
-                    ...((task?.current || 0) >= 0 ? [<Button key={1} size='small' shape='circle' danger type="primary" icon={<MinusOutlined />} onClick={() => handleDecrement(task?.id)} />] : []),
-                    <Button key={2} size='small' shape='circle' type="primary" icon={<PlusOutlined />} onClick={() => handleIncrement(task?.id)} />
-                ] : [
-                    ...(task?.isDone
-                        ? [<Button key={1} size='small' color="danger" shape='circle' variant='solid' icon={<CloseOutlined />} onClick={() => handleMakeTaskDone(task?.id, false)} />]
-                        : [<Button key={2} size='small' color="cyan" shape='circle' variant='solid' icon={<CheckOutlined />} onClick={() => handleMakeTaskDone(task?.id, true)} />]
-                    ),
-                ]
-            }
-            style={{ background: `linear-gradient(150deg, #${themeColor === 'dark' ? '000' : 'fff'}, #${themeColor === 'dark' ? '000000' : 'ffffff'}73), url(${task?.img})` }}
-        >
-            <EditableTask
-                type={task?.type}
-                props={{ ...task }}
-            />
-        </Card>
+        <div className='animated-element'>
+            <Card
+                className={`task-card ${task?.isDone ? 'complete' : 'incomplete'}-task-card animated-element-content`}
+                actions={
+                    task?.isCountable ? [
+                        ...((task?.current || 0) >= 0 ? [<Button key={1} size='small' shape='circle' color='danger' variant='outlined' icon={<MinusOutlined />} onClick={() => handleDecrement(task?.id)} />] : []),
+                        <Button key={2} size='small' shape='circle' color='cyan' variant='outlined' icon={<PlusOutlined />} onClick={() => handleIncrement(task?.id)} />
+                    ] : [
+                        ...(task?.isDone
+                            ? [<Button key={1} size='small' color="danger" shape='circle' variant='outlined' icon={<CloseOutlined />} onClick={() => handleMakeTaskDone(task?.id, false)} />]
+                            : [<Button key={2} size='small' color="cyan" shape='circle' variant='outlined' icon={<CheckOutlined />} onClick={() => handleMakeTaskDone(task?.id, true)} />]
+                        ),
+                    ]
+                }
+                style={{ background: `linear-gradient(150deg, #${themeColor === 'dark' ? '000' : 'fff'}, #${themeColor === 'dark' ? '000000' : 'ffffff'}73), url(${task?.img})` }}
+            >
+                <EditableTask
+                    type={task?.type}
+                    props={{ ...task }}
+                />
+            </Card>
+        </div>
     )
 }
 

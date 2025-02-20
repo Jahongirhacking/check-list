@@ -1,3 +1,4 @@
+import { Flex } from 'antd';
 import React, { Dispatch, ReactElement, SetStateAction } from 'react';
 import { ControlledFlowContext } from './ControlledFlowContext';
 
@@ -47,12 +48,14 @@ const ControlledFlow = ({
         pushData,
       }}
     >
-      {React.Children.map(
-        children,
-        (Component: ReactElement, index: number) => {
-          if (index === currentIndex) return React.cloneElement(Component);
-        }
-      )}
+      <Flex vertical className='controlled-flow-element'>
+        {React.Children.map(
+          children,
+          (Component: ReactElement, index: number) => {
+            if (index === currentIndex) return React.cloneElement(Component);
+          }
+        )}
+      </Flex>
     </ControlledFlowContext.Provider>
   );
 };

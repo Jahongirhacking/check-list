@@ -100,23 +100,25 @@ const MainPage = () => {
                     ))
                 }
             </Flex>
-            <Card className='add-task-card'>
-                <ControlledFlow
-                    currentIndex={step}
-                    setCurrentIndex={setStep}
-                    data={data}
-                    setData={setData}
-                    onSubmit={handleAddTask}
-                >
-                    <InitialAddTaskButton />
-                    <ChooseTaskType />
-                    <TaskContainer
-                        type={(data as IGeneralTaskProps)?.type}
-                        reducerName='edit'
-                        props={{ type: (data as IGeneralTaskProps)?.type }}
-                    />
-                </ControlledFlow>
-            </Card>
+            <Flex vertical className='animated-element'>
+                <Card className='add-task-card animated-element-content'>
+                    <ControlledFlow
+                        currentIndex={step}
+                        setCurrentIndex={setStep}
+                        data={data}
+                        setData={setData}
+                        onSubmit={handleAddTask}
+                    >
+                        <InitialAddTaskButton />
+                        <ChooseTaskType />
+                        <TaskContainer
+                            type={(data as IGeneralTaskProps)?.type}
+                            reducerName='edit'
+                            props={{ type: (data as IGeneralTaskProps)?.type }}
+                        />
+                    </ControlledFlow>
+                </Card>
+            </Flex>
             {
                 !!sortedTasks?.filter(task => task.isDone).length && (
                     <>
