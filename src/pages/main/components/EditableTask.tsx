@@ -66,7 +66,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
             label: "New image",
             icon: <FileImageOutlined />,
             onClick: handleEditImage,
-            style: { color: '#139718' },
+            style: { color: '#4ddd53' },
         },
         {
             key: 'reset',
@@ -80,7 +80,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
             label: "Delete",
             icon: <DeleteOutlined />,
             onClick: handleDelete,
-            style: { color: 'red' },
+            style: { color: '#dc4446' },
         },
         ...((props?.order ?? 0) < tasks.length - 1 ? [{
             key: 'downward',

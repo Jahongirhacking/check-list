@@ -109,20 +109,20 @@ body {
 }
 
 .complete-task-card {
-  opacity: 0.6;
+  opacity: 0.6 !important;
 }
 
 .animated-element {
   .animated-element-content {
     display: block;
     opacity: 0;
-    filter: blur(4px);
-    animation: fade-in 0.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    filter: blur(2px);
+    animation: fade-in 0.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
 
     // Add a delay based on the index of the span element
     @for $i from 1 through 100 {
       &:nth-child(#{$i}) {
-        animation-delay: $i * 0.3s;
+        animation-delay: $i * 0.2s;
       }
     }
   }

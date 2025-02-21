@@ -21,6 +21,19 @@
       .task-body {
         flex: 1;
         padding: 8px;
+
+        .task-content {
+          .task-name > span:first-child {
+            font-size: 9pt;
+          }
+          .task-name > span:nth-child(2) {
+            font-size: 12pt;
+          }
+
+          .current-indicator {
+            color: #1677ff;
+          }
+        }
       }
     }
 
@@ -47,6 +60,14 @@
           }
         }
       }
+    }
+  }
+}
+
+.dark-theme {
+  .task-content {
+    .current-indicator {
+      color: #13a8a8 !important;
     }
   }
 }

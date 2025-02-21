@@ -29,12 +29,54 @@ const MainCard = ({ task }: { task: IGeneralTaskProps }) => {
                 className={`task-card ${task?.isDone ? 'complete' : 'incomplete'}-task-card animated-element-content`}
                 actions={
                     task?.isCountable ? [
-                        ...((task?.current || 0) >= 0 ? [<Button key={1} size='small' shape='circle' color='danger' variant='solid' icon={<MinusOutlined />} onClick={() => handleDecrement(task?.id)} />] : []),
-                        <Button key={2} size='small' shape='circle' color='cyan' variant='solid' icon={<PlusOutlined />} onClick={() => handleIncrement(task?.id)} />
+                        ...((task?.current || 0) >= 0 ? [
+                            <Button
+                                key={1}
+                                size='small'
+                                shape='circle'
+                                color='danger'
+                                variant='filled'
+                                icon={<MinusOutlined />}
+                                style={{ border: "1px solid #dc4446" }}
+                                onClick={() => handleDecrement(task?.id)}
+                            />
+                        ] : []),
+                        <Button
+                            key={2}
+                            size='small'
+                            shape='circle'
+                            color='cyan'
+                            variant='filled'
+                            icon={<PlusOutlined />}
+                            style={{ border: "1px solid #13a8a8" }}
+                            onClick={() => handleIncrement(task?.id)}
+                        />
                     ] : [
                         ...(task?.isDone
-                            ? [<Button key={1} size='small' color="danger" shape='circle' variant='solid' icon={<CloseOutlined />} onClick={() => handleMakeTaskDone(task?.id, false)} />]
-                            : [<Button key={2} size='small' color="cyan" shape='circle' variant='solid' icon={<CheckOutlined />} onClick={() => handleMakeTaskDone(task?.id, true)} />]
+                            ? [
+                                <Button
+                                    key={1}
+                                    size='small'
+                                    color="danger"
+                                    shape='circle'
+                                    variant='filled'
+                                    icon={<CloseOutlined />}
+                                    style={{ border: "1px solid #dc4446" }}
+                                    onClick={() => handleMakeTaskDone(task?.id, false)}
+                                />
+                            ]
+                            : [
+                                <Button
+                                    key={2}
+                                    size='small'
+                                    color="cyan"
+                                    shape='circle'
+                                    variant='filled'
+                                    icon={<CheckOutlined />}
+                                    style={{ border: "1px solid #13a8a8" }}
+                                    onClick={() => handleMakeTaskDone(task?.id, true)}
+                                />
+                            ]
                         ),
                     ]
                 }
