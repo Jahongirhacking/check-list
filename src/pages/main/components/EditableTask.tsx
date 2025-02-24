@@ -14,7 +14,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        if (window.confirm(`Siz ${props?.name} mashg'ulotini o'chirmoqchimisiz ya'ni uni keyin qayta tiklay olmaysiz, shunga rozimisiz?`)) {
+        if (window.confirm(`Are you sure you want to delete the ${props?.name} activity so that you can't restore it later?`)) {
             dispatch(deleteTask(props?.id));
         }
     }
@@ -26,7 +26,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
     }
 
     const handleReset = () => {
-        if (window.confirm(`Siz ${props?.name} mashg'ulotini tozalamoqchimisiz ya'ni undagi ko'rsatkich boshlang'ich holatiga qaytadi, shunga rozimisiz?`)) {
+        if (window.confirm(`Do you want to clear the ${props?.name} activity, meaning that its pointer will be reset to its original state?`)) {
             dispatch(resetTask(props?.id));
         }
     }

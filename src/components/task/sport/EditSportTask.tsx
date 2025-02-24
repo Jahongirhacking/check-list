@@ -30,7 +30,7 @@ const EditSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, set
             totalSets: values?.totalSets,
             reps: values?.reps
         } as ISportTaskProps));
-        message.success('Sport activity is added successfully!');
+        message.success(`${values?.name} - Sport activity is added successfully!`);
     };
 
     return (

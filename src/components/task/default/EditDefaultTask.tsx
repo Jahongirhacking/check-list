@@ -36,7 +36,7 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
             partUnit: values?.partUnit,
             isCountable: values?.isCountable
         } as IDefaultTaskProps));
-        message.success(`${taskTitle} is added successfully!`);
+        message.success(`${values?.name} - ${taskTitle} activity is added successfully!`);
     };
 
     return (
