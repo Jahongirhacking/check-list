@@ -9,4 +9,5 @@ export const localStorageNames = {
   themeColor: "theme-color",
   tasks: "tasks",
   chat_id: "chat-id",
+  lang: "lang",
 };

@@ -18,6 +18,16 @@ body {
   }
 }
 
+.ant-select-dropdown {
+  width: auto !important;
+
+  .ant-select-item {
+    button {
+      width: 100%;
+    }
+  }
+}
+
 .main-layout {
   max-height: 100dvh;
   min-height: 100dvh;
@@ -28,6 +38,10 @@ body {
 
   .navbar {
     background-color: #91caff;
+
+    .ant-select-selector {
+      border: none;
+    }
 
     .ant-avatar {
       background-color: #8381d8;
