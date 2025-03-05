@@ -51,6 +51,8 @@ i18n.use(initReactI18next).init({
           "Do you want to clear the {{name}} activity, meaning that its pointer will be reset to its original state?",
         login_success: "Login is successful!",
         completed_activities: "Completed activities",
+        activities: "activities",
+        track_your_activities: "track your activities!",
       },
     },
     uz: {
@@ -99,6 +101,8 @@ i18n.use(initReactI18next).init({
           "{{name}} mashg‘ulotini tozalashga rozimisiz, ya’ni mashg‘ulot ko‘rsatkichi nolga qaytariladi",
         login_success: "Tizimga muvaffaqiyatli kirdingiz!",
         completed_activities: "Bajarilgan mashg‘ulotlar",
+        activities: "mashg‘ulotlar",
+        track_your_activities: "mashg‘ulotlaringizni nazoratga oling!",
       },
     },
   },

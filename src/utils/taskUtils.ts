@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import moment from "moment";
 import {
   IDefaultTaskProps,
@@ -42,30 +43,34 @@ export const generateGeneralTasksMessage = (
     !dailies.length &&
     !others.length
   ) {
-    message += `<a href="https://checklist-bot.netlify.app/">Create Activity</a>`;
+    message += `<a href="https://checklist-bot.netlify.app/">${t(
+      "create_activity"
+    )}</a>`;
     return message;
   }
   if (sports.length) {
-    message += `<b>Sport activities:</b>\n`;
+    message += `<b>${t("sport")} ${t("activities")}:</b>\n`;
     sports.forEach((task) => (message += generateSportTaskMessage(task)));
     message += "\n";
   }
   if (learnings.length) {
-    message += `<b>Learning activities:</b>\n`;
+    message += `<b>${t("learning")} ${t("activities")}:</b>\n`;
     learnings.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
   if (dailies.length) {
-    message += `<b>Daily activities:</b>\n`;
+    message += `<b>${t("daily")} ${t("activities")}:</b>\n`;
     dailies.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
   if (others.length) {
-    message += `<b>Other activities:</b>\n`;
+    message += `<b>${t("other")} ${t("activities")}:</b>\n`;
     others.forEach((task) => (message += generateDefaultTask(task)));
     message += "\n";
   }
-  message += `<a href="https://checklist-bot.netlify.app/">Checklist App - Track Your Activities</a>`;
+  message += `<a href="https://checklist-bot.netlify.app/">Checklist App - ${t(
+    "track_your_activities"
+  )}</a>`;
   return message;
 };
 
