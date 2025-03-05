@@ -16,6 +16,8 @@ const Navbar: FC<Omit<FlexProps, 'children'>> = (props) => {
     const { t, i18n } = useTranslation();
 
     const handleLogout = () => {
+        document.cookie = "stel_ssid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.oauth.telegram.org";
+        document.cookie = "stel_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.oauth.telegram.org";
         dispatch(logout());
     }
 

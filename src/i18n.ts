@@ -38,6 +38,17 @@ i18n.use(initReactI18next).init({
         sets: "sets",
         choose_activity: "Choose the type of activity",
         logout: "Logout",
+        send_bot: "Send to bot",
+        message_success: "Message is sent successfully!",
+        message_error: "Error on sending message",
+        delete_all:
+          "Are you sure you want to delete all your workouts so you can't restore them later?",
+        reset_all:
+          "Do you want to clear all training sessions, meaning all training metrics will be reset? Are you okay with that?",
+        delete_one:
+          "Are you sure you want to delete the {{name}} activity so that you can't restore it later?",
+        reset_one:
+          "Do you want to clear the {{name}} activity, meaning that its pointer will be reset to its original state?",
       },
     },
     uz: {
@@ -73,6 +84,17 @@ i18n.use(initReactI18next).init({
         sets: "setlar",
         choose_activity: "Mashg‘ulot turini tanlang",
         logout: "Chiqish",
+        send_bot: "Botga yuborish",
+        message_success: "Xabar muvaffaqiyatli yuborildi!",
+        message_error: "Xabarni yuborishda xatolik",
+        delete_all:
+          "Barcha mashg‘ulotlarni o‘chirib yuborishga rozimisiz? Mashg‘ulotlarni qayta tiklay olmaysiz!",
+        reset_all:
+          "Barcha mashg‘ulotlarni tozalashga rozimisiz, ya’ni barcha mashg‘ulot ko‘rsatkichlari nolga qaytariladi",
+        delete_one:
+          "{{name}} mashg‘ulotini o‘chirib yuborishga rozimisiz? Mashg‘ulotni qayta tiklay olmaysiz!",
+        reset_one:
+          "{{name}} mashg‘ulotini tozalashga rozimisiz, ya’ni mashg‘ulot ko‘rsatkichi nolga qaytariladi",
       },
     },
   },

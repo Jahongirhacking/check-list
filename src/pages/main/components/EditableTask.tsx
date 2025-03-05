@@ -17,7 +17,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
     const { t } = useTranslation();
 
     const handleDelete = () => {
-        if (window.confirm(`Are you sure you want to delete the ${props?.name} activity so that you can't restore it later?`)) {
+        if (window.confirm(t('delete_one', { name: props?.name }))) {
             dispatch(deleteTask(props?.id));
         }
     }
@@ -29,7 +29,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
     }
 
     const handleReset = () => {
-        if (window.confirm(`Do you want to clear the ${props?.name} activity, meaning that its pointer will be reset to its original state?`)) {
+        if (window.confirm(t('reset_one', { name: props?.name }))) {
             dispatch(resetTask(props?.id));
         }
     }

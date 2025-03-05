@@ -2,6 +2,7 @@ import { ClearOutlined, DeleteFilled, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, message, Typography } from 'antd'
 import axios from 'axios'
 import React, { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { ThunderEmoji } from '../assets/icons'
 import TelegramLoginButton from '../pages/auth/TelegramLoginButton'
@@ -15,6 +16,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
     const user = useSelector((store: RootState) => store.user);
     const tasks = useSelector((store: RootState) => store.task.tasks);
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const handleSend = async () => {
         try {
@@ -22,21 +24,21 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                 chat_id: getLocalStorage(localStorageNames.chat_id) ?? user?.id,
                 text: generateGeneralTasksMessage(tasks)
             });
-            message.success("Message is sent successfully!")
+            message.success(t("message_success"))
         } catch (err) {
-            message.warning("Error on sending message")
+            message.warning(t("message_error"))
             console.error(err);
         }
     }
 
     const handleDeleteAll = () => {
-        if (window.confirm("Are you sure you want to delete all your workouts so you can't restore them later?")) {
+        if (window.confirm(t('delete_all'))) {
             dispatch(deleteAllTask());
         }
     }
 
     const handleResetAll = () => {
-        if (window.confirm("Do you want to clear all training sessions, meaning all training metrics will be reset? Are you okay with that?")) {
+        if (window.confirm(t('reset_all'))) {
             dispatch(resetAllTask());
         }
     }
@@ -59,7 +61,7 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                                 iconPosition='end'
                                 onClick={handleSend}
                             >
-                                Send via Telegram
+                                {t('send_bot')}
                             </Button>
                         ) : (
                             <TelegramLoginButton />
