@@ -2,6 +2,7 @@ import { Flex, Form, Input, InputNumber, InputRef, Typography, message } from 'a
 import React, { useContext, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ISportTaskProps } from '../../../types';
+import { toFirstCapitalLetter } from '../../../utils/stringUtils';
 import { ControlledFlowContext } from '../../flow/ControlledFlowContext';
 import EditButtons from '../../flow/EditButtons';
 import FlowButtons from '../../flow/FlowButtons';
@@ -51,23 +52,33 @@ const EditSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, set
                 <Flex vertical>
                     <Form.Item
                         name="name"
-                        rules={[{ required: true, message: "Enter exercise name" }]}
+                        rules={[{
+                            required: true, message: `${t('sentence', {
+                                subject: `${t('exercise')} ${t('name')}`,
+                                verb: t('enter')
+                            })}`
+                        }]}
                     >
                         <Input
                             autoComplete='off'
                             ref={(el) => (inputRef.current[0] = el)}
-                            placeholder="Exercise name"
+                            placeholder={`${t('exercise')} ${t('name')}`}
                             onPressEnter={() => handlePressEnter(0)}
                         />
                     </Form.Item>
 
                     <Form.Item
                         name="reps"
-                        rules={[{ required: true, message: "Enter the reps" }]}
+                        rules={[{
+                            required: true, message: `${t('sentence', {
+                                subject: `${toFirstCapitalLetter(t('reps'))}`,
+                                verb: t('enter')
+                            })}`
+                        }]}
                     >
                         <InputNumber
                             ref={(el) => (inputRef.current[1] = el)}
-                            placeholder="Number of reps"
+                            placeholder={`${t('sentence', { subject: toFirstCapitalLetter(t('reps')), verb: t('number_of') })}`}
                             onPressEnter={() => handlePressEnter(1)}
                             style={{ width: '100%' }}
                         />
@@ -75,11 +86,16 @@ const EditSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, set
 
                     <Form.Item
                         name="totalSets"
-                        rules={[{ required: true, message: "Enter the sets" }]}
+                        rules={[{
+                            required: true, message: `${t('sentence', {
+                                subject: `${toFirstCapitalLetter(t('sets'))}`,
+                                verb: t('enter')
+                            })}`
+                        }]}
                     >
                         <InputNumber
                             ref={(el) => (inputRef.current[2] = el)}
-                            placeholder="Number of sets"
+                            placeholder={`${t('sentence', { subject: toFirstCapitalLetter(t('sets')), verb: t('number_of') })}`}
                             onPressEnter={() => handlePressEnter(2)}
                             style={{ width: '100%' }}
                         />

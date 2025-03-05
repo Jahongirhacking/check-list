@@ -1,5 +1,6 @@
 import { Button, Flex, Typography } from 'antd';
 import React, { ReactElement, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ControlledFlowContext } from '../../../components/flow/ControlledFlowContext';
 import FlowButtons from '../../../components/flow/FlowButtons';
 import { IGeneralTaskProps } from '../../../types';
@@ -7,21 +8,22 @@ import { IGeneralTaskProps } from '../../../types';
 const ChooseTaskType = () => {
     const context = useContext(ControlledFlowContext);
     const [selectedType, setSelectedType] = useState<IGeneralTaskProps['type'] | null>(null);
+    const { t } = useTranslation();
     const types: { label: ReactElement, value: IGeneralTaskProps["type"] }[] = [
         {
-            label: <Typography.Text strong>Sport 💪</Typography.Text>,
+            label: <Typography.Text strong>{t('sport')} 💪</Typography.Text>,
             value: 'sport',
         },
         {
-            label: <Typography.Text strong>Learning 📚</Typography.Text>,
+            label: <Typography.Text strong>{t('learning')} 📚</Typography.Text>,
             value: 'learning',
         },
         {
-            label: <Typography.Text strong>Daily 🧹</Typography.Text>,
+            label: <Typography.Text strong>{t('daily')} 🧹</Typography.Text>,
             value: 'daily',
         },
         {
-            label: <Typography.Text strong>Other 🍿</Typography.Text>,
+            label: <Typography.Text strong>{t('other')} 🍿</Typography.Text>,
             value: 'other',
         },
     ];
@@ -34,7 +36,7 @@ const ChooseTaskType = () => {
 
     return (
         <Flex vertical gap={12} className='choose-task-type'>
-            <Typography.Text strong>Choose the type of activity:</Typography.Text>
+            <Typography.Text strong>{t('choose_activity')}:</Typography.Text>
             <Flex vertical gap={8}>
                 {
                     types.map(t => (

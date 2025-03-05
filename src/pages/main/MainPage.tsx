@@ -1,6 +1,7 @@
 import { Card, Divider, Flex, Segmented } from 'antd'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import ControlledFlow from '../../components/flow/ControlledFlow'
@@ -26,12 +27,13 @@ const MainPage = () => {
     const [getGist] = useGetGistMutation();
     const [editGist] = useEditGistMutation();
     const [createGist] = useCreateGistMutation();
+    const { t } = useTranslation();
     const taskOptions: { label: string, value: IGeneralTaskProps['type'] | 'all' }[] = [
-        { label: 'All', value: 'all' },
-        { label: 'Sport', value: 'sport' },
-        { label: 'Learning', value: 'learning' },
-        { label: 'Daily', value: 'daily' },
-        { label: 'Other', value: 'other' },
+        { label: t('all'), value: 'all' },
+        { label: t('sport'), value: 'sport' },
+        { label: t('learning'), value: 'learning' },
+        { label: t('daily'), value: 'daily' },
+        { label: t('other'), value: 'other' },
     ]
     const [taskType, setTaskType] = useState(taskOptions[0].value);
 
