@@ -124,7 +124,7 @@ const MainPage = () => {
             {
                 !!sortedTasks?.filter(task => task.isDone).length && (
                     <>
-                        <Divider>Completed activities</Divider>
+                        <Divider>{t('completed_activities')}</Divider>
                         <Flex vertical gap={8}>
                             {
                                 sortedTasks?.filter(task => task.isDone)?.map(task => (

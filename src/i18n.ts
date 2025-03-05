@@ -50,6 +50,7 @@ i18n.use(initReactI18next).init({
         reset_one:
           "Do you want to clear the {{name}} activity, meaning that its pointer will be reset to its original state?",
         login_success: "Login is successful!",
+        completed_activities: "Completed activities",
       },
     },
     uz: {
@@ -97,6 +98,7 @@ i18n.use(initReactI18next).init({
         reset_one:
           "{{name}} mashg‘ulotini tozalashga rozimisiz, ya’ni mashg‘ulot ko‘rsatkichi nolga qaytariladi",
         login_success: "Tizimga muvaffaqiyatli kirdingiz!",
+        completed_activities: "Bajarilgan mashg‘ulotlar",
       },
     },
   },

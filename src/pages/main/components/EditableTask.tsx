@@ -83,7 +83,7 @@ const EditableTask: FC<Omit<ITaskContainer, 'reducerName' | 'children'>> = ({ pr
             label: toFirstCapitalLetter(t('delete')),
             icon: <DeleteOutlined />,
             onClick: handleDelete,
-            style: { color: '#dc4446' },
+            style: { color: '#eb3e40' },
         },
         ...((props?.order ?? 0) < tasks.length - 1 ? [{
             key: 'downward',
