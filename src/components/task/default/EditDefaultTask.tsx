@@ -1,6 +1,7 @@
 import { Checkbox, Flex, Form, Input, InputNumber, InputRef, Typography, message } from 'antd';
 import { useWatch } from 'antd/es/form/Form';
 import React, { useContext, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IDefaultTaskProps } from '../../../types';
 import { ControlledFlowContext } from '../../flow/ControlledFlowContext';
 import EditButtons from '../../flow/EditButtons';
@@ -11,8 +12,9 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
     const [form] = Form.useForm();
     const inputRef = useRef<(InputRef | HTMLInputElement | null)[]>([]);
     const context = useContext(ControlledFlowContext);
+    const { t } = useTranslation();
 
-    const taskTitle = props?.type === 'daily' ? "Daily" : props?.type === 'learning' ? "Learning" : "Other";
+    const taskTitle = props?.type === 'daily' ? t('daily') : props?.type === 'learning' ? t('learning') : t('other');
     const isCountable = useWatch('isCountable', form);
     const partUnit = useWatch('partUnit', form);
 
@@ -36,12 +38,12 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
             partUnit: values?.partUnit,
             isCountable: values?.isCountable
         } as IDefaultTaskProps));
-        message.success(`${values?.name} - ${taskTitle} activity is added successfully!`);
+        message.success(`${values?.name} - ${taskTitle} ${t('activity_sub')} ${t('added_success')}`);
     };
 
     return (
         <Flex vertical gap={12} className='default-task edit-task'>
-            <Typography.Text strong>{context ? "Add" : "Edit"} {taskTitle.toLowerCase()} activity</Typography.Text>
+            <Typography.Text strong>{t("sentence", { subject: `${taskTitle} ${t("activity_sub")}`, verb: context ? t('add') : t('edit') })}</Typography.Text>
             <Form
                 form={form}
                 onFinish={onFinish}
@@ -57,12 +59,17 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
                 <Flex vertical>
                     <Form.Item
                         name="name"
-                        rules={[{ required: true, message: "Enter activity name" }]}
+                        rules={[{
+                            required: true, message: `${t('sentence', {
+                                subject: `${t('activity')} ${t('name')}`,
+                                verb: t('enter')
+                            })}`
+                        }]}
                     >
                         <Input
                             autoComplete='off'
                             ref={(el) => (inputRef.current[0] = el)}
-                            placeholder="Activity name"
+                            placeholder={`${t('activity')} ${t('name')}`}
                             onPressEnter={() => handlePressEnter(0)}
                         />
                     </Form.Item>
@@ -71,7 +78,7 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
                         name="isCountable"
                         valuePropName='checked'
                     >
-                        <Checkbox>Partial activity</Checkbox>
+                        <Checkbox>{t('partial_activity')}</Checkbox>
                     </Form.Item>
 
                     {
@@ -79,11 +86,16 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
                             <>
                                 <Form.Item
                                     name="partUnit"
-                                    rules={[{ required: true, message: "Enter unit name" }]}
+                                    rules={[{
+                                        required: true, message: `${t('sentence', {
+                                            subject: `${t('unit')} ${t('name')}`,
+                                            verb: t('enter')
+                                        })}`
+                                    }]}
                                 >
                                     <Input
                                         ref={(el) => (inputRef.current[1] = el)}
-                                        placeholder="Unit name (page, part, series, etc.)"
+                                        placeholder={`${t('unit')} ${t('name')} ${t('unit_ex')}`}
                                         onPressEnter={() => handlePressEnter(1)}
                                         style={{ width: '100%' }}
                                     />
@@ -91,11 +103,16 @@ const EditDefaultTask = ({ props, setReducerName }: { props?: IDefaultTaskProps,
 
                                 <Form.Item
                                     name="totalPart"
-                                    rules={[{ required: true, message: `Enter number of ${partUnit || 'parts'}` }]}
+                                    rules={[{
+                                        required: true, message: `${t('sentence', {
+                                            subject: `${t('sentence', { subject: partUnit || t('parts'), verb: t('number_of').toLowerCase() })}`,
+                                            verb: t('enter')
+                                        })}`
+                                    }]}
                                 >
                                     <InputNumber
                                         ref={(el) => (inputRef.current[2] = el)}
-                                        placeholder={`Number of ${partUnit || 'parts'}`}
+                                        placeholder={`${t('sentence', { subject: partUnit || t('parts'), verb: t('number_of') })}`}
                                         onPressEnter={() => handlePressEnter(2)}
                                         style={{ width: '100%' }}
                                     />

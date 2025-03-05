@@ -119,6 +119,10 @@ body {
     background-color: #ffffffbc;
     backdrop-filter: blur(2px);
     border: 1px solid #141414;
+
+    .ant-form-item:has(.ant-checkbox-wrapper) {
+      margin-bottom: 16px !important;
+    }
   }
 }
 

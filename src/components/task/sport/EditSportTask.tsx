@@ -1,5 +1,6 @@
 import { Flex, Form, Input, InputNumber, InputRef, Typography, message } from 'antd';
 import React, { useContext, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ISportTaskProps } from '../../../types';
 import { ControlledFlowContext } from '../../flow/ControlledFlowContext';
 import EditButtons from '../../flow/EditButtons';
@@ -10,6 +11,7 @@ const EditSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, set
     const [form] = Form.useForm();
     const inputRef = useRef<(InputRef | HTMLInputElement | null)[]>([]);
     const context = useContext(ControlledFlowContext);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (inputRef.current[0]) {
@@ -30,12 +32,12 @@ const EditSportTask = ({ props, setReducerName }: { props?: ISportTaskProps, set
             totalSets: values?.totalSets,
             reps: values?.reps
         } as ISportTaskProps));
-        message.success(`${values?.name} - Sport activity is added successfully!`);
+        message.success(`${values?.name} - Sport ${t('activity_sub')} ${t('added_success')}`);
     };
 
     return (
         <Flex vertical gap={12} className='sport-task edit-task'>
-            <Typography.Text strong>{context ? "Add" : "Edit"} sport activity</Typography.Text>
+            <Typography.Text strong>{t("sentence", { subject: `Sport ${t("activity_sub")}`, verb: context ? t('add') : t('edit') })}</Typography.Text>
             <Form
                 form={form}
                 onFinish={onFinish}
