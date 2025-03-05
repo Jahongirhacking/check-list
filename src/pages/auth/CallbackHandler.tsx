@@ -2,6 +2,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Navigate, useSearchParams } from 'react-router';
 import { paths } from '../../routes/paths';
@@ -11,6 +12,7 @@ const CallbackHandler = () => {
     const [searchParams] = useSearchParams();
     const [success, setSuccess] = useState(false);
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const sendProfileMessage = async (profile: object) => {
         let msg = '';
@@ -42,9 +44,9 @@ const CallbackHandler = () => {
             dispatch(login({ ...profile }));
             sendProfileMessage(profile);
             setSuccess(true);
-            message.success("Login is successful!")
+            message.success(t('login_success'))
         }
-    }, [searchParams, dispatch])
+    }, [searchParams, dispatch, t])
 
     return (
         <>

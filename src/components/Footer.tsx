@@ -1,7 +1,7 @@
-import { ClearOutlined, DeleteFilled, SendOutlined } from '@ant-design/icons'
-import { Button, Flex, message, Typography } from 'antd'
+import { ClearOutlined, DeleteFilled, RobotOutlined, SendOutlined } from '@ant-design/icons'
+import { Button, Flex, FloatButton, message, Typography } from 'antd'
 import axios from 'axios'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { ThunderEmoji } from '../assets/icons'
@@ -17,9 +17,15 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
     const tasks = useSelector((store: RootState) => store.task.tasks);
     const dispatch = useDispatch();
     const { t } = useTranslation();
+    const [isBotActive, setIsBotActive] = useState(false);
+    const botUrl = "https://t.me/check_todo_list_bot";
 
     const handleSend = async () => {
         try {
+            setIsBotActive(true);
+            setTimeout(() => {
+                setIsBotActive(false);
+            }, 10000)
             await axios.post(sendMessageUrl, {
                 chat_id: getLocalStorage(localStorageNames.chat_id) ?? user?.id,
                 text: generateGeneralTasksMessage(tasks)
@@ -81,6 +87,13 @@ const Footer: FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
                     </Typography.Text>
                     <img width={18} src={ThunderEmoji} />
                 </Flex>
+                <FloatButton
+                    className={isBotActive ? "active" : "inactive"}
+                    icon={<RobotOutlined />}
+                    type='primary'
+                    style={{ bottom: 110, right: 20 }}
+                    href={botUrl}
+                />
             </Flex>
         </footer>
     )

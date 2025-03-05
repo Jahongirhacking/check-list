@@ -6,6 +6,26 @@
 
 body {
   overflow-x: hidden;
+
+  .ant-float-btn:has(.anticon-robot) {
+    transition: all 0.4s ease;
+    &.active {
+      animation: 1.5s ease infinite alternate active_button;
+      display: block;
+    }
+    &.inactive {
+      display: none;
+    }
+  }
+}
+
+@keyframes active_button {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
 }
 
 .padding-box {

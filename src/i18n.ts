@@ -49,6 +49,7 @@ i18n.use(initReactI18next).init({
           "Are you sure you want to delete the {{name}} activity so that you can't restore it later?",
         reset_one:
           "Do you want to clear the {{name}} activity, meaning that its pointer will be reset to its original state?",
+        login_success: "Login is successful!",
       },
     },
     uz: {
@@ -95,6 +96,7 @@ i18n.use(initReactI18next).init({
           "{{name}} mashg‘ulotini o‘chirib yuborishga rozimisiz? Mashg‘ulotni qayta tiklay olmaysiz!",
         reset_one:
           "{{name}} mashg‘ulotini tozalashga rozimisiz, ya’ni mashg‘ulot ko‘rsatkichi nolga qaytariladi",
+        login_success: "Tizimga muvaffaqiyatli kirdingiz!",
       },
     },
   },
