@@ -9,6 +9,7 @@ body {
 
   .ant-float-btn:has(.anticon-robot) {
     transition: all 0.4s ease;
+    backdrop-filter: blur(3px);
     &.active {
       animation: 1.5s ease infinite alternate active_button;
       display: block;
