@@ -16,6 +16,10 @@ body {
     &.inactive {
       display: none;
     }
+
+    .ant-float-btn-body {
+      background-color: transparent;
+    }
   }
 }
 
@@ -185,6 +189,10 @@ body {
 
 .dark-theme {
   background-color: rgb(46, 46, 46);
+
+  .ant-float-btn:has(.anticon-robot) {
+    background-color: #0cbd9793 !important;
+  }
 
   .navbar {
     background-color: #002329;
