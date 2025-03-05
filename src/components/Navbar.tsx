@@ -17,9 +17,10 @@ const Navbar: FC<Omit<FlexProps, 'children'>> = (props) => {
 
     const handleLogout = () => {
         // clean cookie
-        document.cookie = "stel_ssid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=oauth.telegram.org";
-        document.cookie = "stel_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=oauth.telegram.org";
+        const botId = "7694451864";
+        const origin = window.location.origin;
         dispatch(logout());
+        window.location.href = `https://oauth.telegram.org/auth/logout?bot_id=${botId}&origin=${encodeURIComponent(origin)}`;
     }
 
     const changeLanguage = (value: string) => {
