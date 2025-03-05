@@ -1,15 +1,29 @@
 import { t } from "i18next";
 import moment from "moment";
+import i18n from "../i18n";
 import {
   IDefaultTaskProps,
   IGeneralTaskProps,
   ISportTaskProps,
 } from "../types";
 
+moment.updateLocale("uz", {
+  weekdays: [
+    "Yakshanba",
+    "Dushanba",
+    "Seshanba",
+    "Chorshanba",
+    "Payshanba",
+    "Juma",
+    "Shanba",
+  ],
+  weekdaysShort: ["Yak", "Dush", "Sesh", "Chor", "Pay", "Jum", "Shan"],
+});
+
 export const generateGeneralTasksMessage = (
   tasks: IGeneralTaskProps[]
 ): string => {
-  moment.locale("uz");
+  moment.locale(i18n.language === "uz" ? "uz" : "en");
   let message = "";
   message += `${moment().format("📅 DD.MM.YYYY - dddd - HH:mm")}`;
   message += "\n\n";
